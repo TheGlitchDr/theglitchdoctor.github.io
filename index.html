@@ -65,7 +65,6 @@
       to { opacity: 1; }
     }
 
-    /* Dropdown style improvements */
     .dropdown-menu a {
       display: flex;
       align-items: center;
@@ -82,7 +81,6 @@
       background-color: var(--hover-light-blue);
     }
 
-    /* Basic card style */
     .card {
       background: var(--card-background-light);
       padding: 1rem;
@@ -96,7 +94,6 @@
       background: var(--card-background-dark);
     }
 
-    /* Logo in center */
     .page-header {
       text-align: center;
       margin: 2rem 0 1rem;
@@ -201,21 +198,6 @@
       pointer-events: auto;
     }
 
-    .dropdown-menu a, .launcher-menu a {
-      display: block;
-      padding: 8px 10px;
-      text-decoration: none;
-      color: #16325c;
-      font-size: 0.9rem;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .dropdown-menu a:hover, .launcher-menu a:hover {
-      background-color: var(--hover-light-blue);
-      color: #0070d2;
-    }
-
     .glitch-console {
       margin: 0 20px 0 12px;
       font-size: 1rem;
@@ -229,15 +211,6 @@
       25% { transform: translate(1px, -1px); }
       50% { transform: translate(-1px, 1px); }
       75% { transform: translate(1px, 1px); }
-    }
-
-    @keyframes glitch {
-      0% { transform: none; opacity: 1; }
-      20% { transform: translate(-1px, 1px); opacity: 0.9; }
-      40% { transform: translate(1px, -1px); opacity: 1; }
-      60% { transform: translate(-1px, 1px); opacity: 0.95; }
-      80% { transform: translate(1px, -1px); opacity: 1; }
-      100% { transform: none; opacity: 1; }
     }
 
     .site-title {
@@ -285,24 +258,6 @@
       text-align: center;
     }
 
-    .page-header img {
-      max-width: 250px;
-      width: 100%;
-      height: auto;
-      margin-bottom: 1rem;
-    }
-
-    .page-header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-      color: #16325c;
-    }
-
-    .page-header p {
-      margin-top: 0.5rem;
-      color: #555;
-    }
-
     .cards {
       display: flex;
       flex-wrap: wrap;
@@ -310,32 +265,8 @@
       justify-content: center;
     }
 
-    .card {
-      flex: 1 1 calc(50% - 1rem);
-      background: var(--card-background-light);
-      border-radius: 6px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      padding: 1rem;
-      transition: background 0.5s, box-shadow 0.3s;
-    }
-
-    body.dark-mode .card {
-      background: var(--card-background-dark);
-    }
-
     .card:hover {
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    .card h2 {
-      margin-top: 0;
-      color: #16325c;
-      font-size: 1.2rem;
-    }
-
-    .card p {
-      color: #333;
-      font-size: 0.95rem;
     }
 
     .quick-actions button {
@@ -362,6 +293,82 @@
       .site-title { font-size: 0.9rem; margin-top: 0.5rem; }
       .navbar { justify-content: center; }
       .nav-left { justify-content: center; }
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: #f3f6f9;
+      border-top: 1px solid #d8dde6;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #16325c;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    .site-footer .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo img {
+      height: 50px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      margin: 0 12px;
+      color: #0070d2;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #005fb2;
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin-top: 0.5rem;
+    }
+
+    .social-icons a img {
+      width: 24px;
+      height: 24px;
+      margin: 0 5px;
+      filter: grayscale(100%);
+      transition: filter 0.3s;
+    }
+
+    .social-icons a:hover img {
+      filter: none;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    body.dark-mode .site-footer {
+      background-color: #2e364a;
+      color: #f4f6f9;
+    }
+
+    body.dark-mode .footer-links a {
+      color: #f4f6f9;
+    }
+
+    body.dark-mode .footer-links a:hover {
+      color: #c0d4f2;
+    }
+
+    body.dark-mode .footer-copy {
+      color: #aaa;
     }
   </style>
 </head>
