@@ -522,9 +522,11 @@ body.dark-mode .card:hover {
 .top-navbar-left,
 .top-navbar-center,
 .top-navbar-right {
-  flex: 1;
-  display: flex;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: center; /* <-- Center vertically */
+  gap: 0.75rem; /* <-- Add nice space between toggle and logo */
+  padding-right: 1rem; /* <-- Add padding so logo doesn’t touch edge */
+  min-width: 120px; /* <-- Prevent squishing */
 }
 
 .top-navbar-center {
