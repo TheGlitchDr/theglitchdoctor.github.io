@@ -525,7 +525,7 @@ body.dark-mode .card:hover {
   flex: 1 1 auto;
   display: flex;
   justify-content: center;
-  padding: 0 2rem; /* NEW! Add horizontal padding */
+  padding-right: 2rem; /* <-- Only padding-right, no left padding */
 }
 
 .top-navbar-right {
