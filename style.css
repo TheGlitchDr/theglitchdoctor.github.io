@@ -540,15 +540,14 @@ body.dark-mode .card:hover {
   width: 100%;
   max-width: 400px;
   padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 9999px; /* pill shape */
+  border: 1px solid #d8dde6; /* Light grey border */
+  border-radius: 4px; /* ← THIS is the correct Salesforce style */
   font-size: 1rem;
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  background-color: #ffffff;
 }
 
 .top-search-bar:focus {
   outline: none;
-  border-color: var(--highlight-color);
-  box-shadow: 0 0 8px rgba(0,112,210,0.4);
+  border-color: var(--highlight-color); /* your Salesforce blue */
+  box-shadow: 0 0 4px rgba(0,112,210,0.4); /* optional slight glow */
 }
