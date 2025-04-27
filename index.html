@@ -24,6 +24,7 @@
     .nav-left {
       display: flex;
       align-items: center;
+      position: relative;
     }
 
     .tab-button {
@@ -35,7 +36,6 @@
       color: #16325c;
       font-weight: bold;
       cursor: pointer;
-      position: relative;
       margin-right: 1rem;
       display: flex;
       align-items: center;
@@ -48,9 +48,9 @@
     }
 
     .tab-button::after {
-      content: "▼";
+      content: " ▼";
       font-size: 0.7rem;
-      margin-left: 8px;
+      margin-left: 6px;
     }
 
     .dropdown-menu {
@@ -185,15 +185,13 @@
 <!-- Navbar -->
 <header class="navbar">
   <div class="nav-left">
-    <div class="dropdown">
-      <button id="tabButton" class="tab-button active">Dashboard</button>
-      <div id="dropdownMenu" class="dropdown-menu">
-        <a href="#">Dashboard</a>
-        <a href="#">Calendar</a>
-        <a href="#">Tasks</a>
-        <a href="#">Clients</a>
-        <a href="#">Settings</a>
-      </div>
+    <button id="tabButton" class="tab-button active">Dashboard</button>
+    <div id="dropdownMenu" class="dropdown-menu">
+      <a href="#">Dashboard</a>
+      <a href="#">Calendar</a>
+      <a href="#">Tasks</a>
+      <a href="#">Clients</a>
+      <a href="#">Settings</a>
     </div>
     <div class="site-title">The Glitch Doctor - Salesforce-ish Site</div>
   </div>
@@ -233,7 +231,7 @@
   });
 
   window.addEventListener('click', function (e) {
-    if (!tabButton.contains(e.target)) {
+    if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
       dropdownMenu.classList.remove('show');
     }
   });
