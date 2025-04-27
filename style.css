@@ -526,7 +526,7 @@ body.dark-mode .card:hover {
   display: flex;
   justify-content: center;
   padding-right: 2rem;
-  margin-right: -4rem; /* NEW: Reduce space */
+  margin-right: -8rem; /* NEW: Reduce space */
 }
 
 .top-navbar-right {
