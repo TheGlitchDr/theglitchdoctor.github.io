@@ -241,6 +241,22 @@
       background: #005fb2;
     }
 
+    footer {
+      background: #f3f6f9;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #555;
+      border-top: 1px solid #d8dde6;
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: var(--highlight-color);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
     @media (max-width: 768px) {
       .cards { flex-direction: column; }
       .search-bar-top { display: none; }
@@ -254,8 +270,36 @@
 <body>
 
 <!-- Loading Screen -->
-<div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0070d2;">
-  Loading Glitch Console...
+<div id="loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+  <svg style="width: 50px; height: 50px; margin-bottom: 1rem;" viewBox="0 0 50 50">
+    <circle cx="25" cy="25" r="20" stroke="#0176d3" stroke-width="4" fill="none" stroke-linecap="round">
+      <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" from="0 25 25" to="360 25 25"/>
+    </circle>
+  </svg>
+  <div style="font-size: 1.2rem; color: #0176d3; font-weight: bold;">Loading Glitch Console...</div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" style="
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #0176d3;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 16px;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+  opacity: 0;
+">
+  🚀 Welcome to the Glitch Console!
 </div>
 
 <!-- Header -->
@@ -323,39 +367,40 @@
   </div>
 </main>
 
+<!-- Footer -->
+<footer>
+  <div>
+    <p>© 2025 The Glitch Doctor. Built with ❤️ for Salesforce Professionals.</p>
+    <p>
+      <a href="mailto:doc@theglitchdoctor.com">Contact</a> |
+      <a href="#">Privacy</a> |
+      <a href="#">Terms</a>
+    </p>
+  </div>
+</footer>
+
 <!-- Scripts -->
 <script>
-// Loading
 window.addEventListener("load", function() {
   document.getElementById("loader").style.display = "none";
   document.querySelector("header").style.display = "flex";
   document.querySelector("main").style.display = "block";
+
+  // Show toast
+  var toast = document.getElementById("toast");
+  toast.style.visibility = "visible";
+  toast.style.opacity = "1";
+  setTimeout(function() {
+    toast.style.opacity = "0";
+    toast.style.visibility = "hidden";
+  }, 3000);
 });
 
-// Menus
 const tabButton = document.getElementById('tabButton');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const launcherButton = document.getElementById('launcherButton');
 const launcherMenu = document.getElementById('launcherMenu');
 
-// Dark Mode Memory
-const darkModeToggle = document.getElementById('darkModeToggle');
-if (localStorage.getItem('darkMode') === 'enabled') {
-  document.body.classList.add('dark-mode');
-  darkModeToggle.checked = true;
-}
-
-darkModeToggle.addEventListener('change', function() {
-  if (this.checked) {
-    document.body.classList.add('dark-mode');
-    localStorage.setItem('darkMode', 'enabled');
-  } else {
-    document.body.classList.remove('dark-mode');
-    localStorage.setItem('darkMode', 'disabled');
-  }
-});
-
-// Dropdown Menus
 tabButton.addEventListener('click', function(e) {
   e.stopPropagation();
   dropdownMenu.classList.toggle('visible');
@@ -373,6 +418,22 @@ window.addEventListener('click', function(e) {
       !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
     dropdownMenu.classList.remove('visible');
     launcherMenu.classList.remove('visible');
+  }
+});
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+if (localStorage.getItem('darkMode') === 'enabled') {
+  document.body.classList.add('dark-mode');
+  darkModeToggle.checked = true;
+}
+
+darkModeToggle.addEventListener('change', function() {
+  if (this.checked) {
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('darkMode', 'enabled');
+  } else {
+    document.body.classList.remove('dark-mode');
+    localStorage.setItem('darkMode', 'disabled');
   }
 });
 </script>
