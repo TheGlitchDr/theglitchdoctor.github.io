@@ -32,7 +32,7 @@
       color: var(--text-dark);
     }
 
-    /* Top Utility Bar */
+    /* Utility Bar (New Top Bar) */
     .utility-bar {
       background: #ffffff;
       height: 50px;
@@ -41,8 +41,6 @@
       justify-content: space-between;
       padding: 0 1rem;
       border-bottom: 1px solid #e0e0e0;
-      position: relative;
-      z-index: 2;
     }
 
     .utility-bar .search-center {
@@ -65,12 +63,12 @@
       gap: 10px;
     }
 
-    .utility-bar .profile-icon {
-      width: 32px;
-      height: 32px;
+    .utility-bar .logo {
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: url('GlitchDoctor_NoBackground.png') no-repeat center/cover;
-      border: 1px solid #ccc;
+      object-fit: contain;
+      background: white;
     }
 
     /* Main Nav Bar */
@@ -79,21 +77,19 @@
       height: 65px;
       display: flex;
       align-items: center;
-      gap: 20px;
       padding: 0 1rem;
+      gap: 20px;
       border-bottom: 1px solid #e0e0e0;
-      position: relative;
-      z-index: 1;
     }
 
     .launcher-button {
       background: transparent;
       border: none;
       cursor: pointer;
-      width: 36px;
-      height: 36px;
       display: flex;
       flex-wrap: wrap;
+      width: 32px;
+      height: 32px;
       gap: 2px;
     }
 
@@ -126,11 +122,11 @@
       white-space: nowrap;
     }
 
-    /* Dropdowns */
+    /* Dropdown Menus */
     .dropdown-menu, .launcher-menu {
       display: none;
       position: absolute;
-      top: 65px;
+      top: 115px;
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -160,7 +156,7 @@
       background-color: var(--hover-light-blue);
     }
 
-    /* Cards and Page */
+    /* Main Content */
     .container {
       padding: 2rem;
     }
@@ -172,10 +168,6 @@
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       transition: background 0.5s;
-    }
-
-    body.dark-mode .card {
-      background: var(--card-background-dark);
     }
 
     .page-header {
@@ -197,7 +189,7 @@
 
 <body>
 
-<!-- Top Utility Bar -->
+<!-- Utility Bar (Top) -->
 <div class="utility-bar">
   <div></div>
   <div class="search-center">
@@ -206,11 +198,11 @@
   <div class="utility-right">
     <label for="darkModeToggle">🌙</label>
     <input type="checkbox" id="darkModeToggle">
-    <div class="profile-icon"></div>
+    <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
   </div>
 </div>
 
-<!-- Main Nav Bar -->
+<!-- Main Nav Bar (Below) -->
 <header class="navbar">
   <button id="launcherButton" class="launcher-button">
     <div></div><div></div><div></div>
@@ -226,17 +218,15 @@
 
   <!-- Menus -->
   <div class="launcher-menu" id="launcherMenu">
-    <div class="launcher-title" style="padding: 0 12px 8px; font-weight:bold;">Tools</div>
-    <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">🛠 Data Loader Guide</a>
-    <a href="#">🔧 Tool 2</a>
-    <a href="#">🗂 Tool 3</a>
-    <a href="#">🔗 Tool 4</a>
+    <a href="#">Tool 1</a>
+    <a href="#">Tool 2</a>
+    <a href="#">Tool 3</a>
   </div>
 
   <div class="dropdown-menu" id="dropdownMenu">
-    <a href="tel:9712606993">📞 Call Doc</a>
-    <a href="mailto:doc@theglitchdoctor.com">✉️ Email Doc</a>
-    <a href="#">📅 Schedule Appointment</a>
+    <a href="tel:9712606993">Call Doc</a>
+    <a href="mailto:doc@theglitchdoctor.com">Email Doc</a>
+    <a href="#">Schedule Appointment</a>
   </div>
 </header>
 
@@ -255,10 +245,9 @@
 </main>
 
 <script>
-window.addEventListener("load", function() {
-  document.querySelector("main").style.display = "block";
-});
+// Loader display skipped since your last known good didn't have it
 
+// Launcher and Tab Menus
 const launcherButton = document.getElementById('launcherButton');
 const tabButton = document.getElementById('tabButton');
 const launcherMenu = document.getElementById('launcherMenu');
@@ -281,7 +270,7 @@ window.addEventListener('click', function() {
   dropdownMenu.classList.remove('visible');
 });
 
-// Dark mode
+// Dark Mode toggle
 const darkModeToggle = document.getElementById('darkModeToggle');
 if (localStorage.getItem('darkMode') === 'enabled') {
   document.body.classList.add('dark-mode');
