@@ -1,291 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Glitch Doctor Dashboard</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link href="https://fonts.cdnfonts.com/css/salesforce-sans" rel="stylesheet">
-
   <style>
-    :root {
-      --background-light: #f4f6f9;
-      --background-dark: #2e364a;
-      --text-light: #333;
-      --text-dark: #f4f6f9;
-      --card-background-light: #ffffff;
-      --card-background-dark: #3a4256;
-      --highlight-color: #0070d2;
-      --hover-light-blue: #eef4ff;
-    }
-
     body {
       margin: 0;
-      font-family: 'Salesforce Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background-color: var(--background-light);
-      color: var(--text-light);
-      transition: background-color 0.5s, color 0.5s;
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
     }
 
-    body.dark-mode {
-      background-color: var(--background-dark);
-      color: var(--text-dark);
-    }
-
-    /* Utility Bar (New Top Bar) */
-    .utility-bar {
-      background: #ffffff;
-      height: 50px;
+    /* Navigation Bar */
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #d8dde6;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 1rem;
-      border-bottom: 1px solid #e0e0e0;
+      padding: 0.3rem 1rem;
     }
 
-    .utility-bar .search-center {
-      flex: 1;
-      text-align: center;
-    }
-
-    .utility-bar input[type="text"] {
-      width: 40%;
-      min-width: 300px;
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    .utility-bar .utility-right {
+    .nav-left {
       display: flex;
       align-items: center;
-      gap: 10px;
-    }
-
-    .utility-bar .logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: contain;
-      background: white;
-    }
-
-    /* Main Nav Bar */
-    header.navbar {
-      background: #f4f6f9;
-      height: 65px;
-      display: flex;
-      align-items: center;
-      padding: 0 1rem;
-      gap: 20px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    .launcher-button {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-wrap: wrap;
-      width: 32px;
-      height: 32px;
-      gap: 2px;
-    }
-
-    .launcher-button div {
-      width: 8px;
-      height: 8px;
-      background: var(--text-light);
-      border-radius: 50%;
-    }
-
-    .glitch-console {
-      font-weight: bold;
-      font-size: 18px;
-      white-space: nowrap;
+      position: relative;
     }
 
     .tab-button {
-      background: white;
-      border: 1px solid #ccc;
-      padding: 8px 14px;
-      border-radius: 20px;
+      background: #f3f6f9;
+      border: 1px solid #d8dde6;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #16325c;
       font-weight: bold;
-      font-size: 14px;
       cursor: pointer;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .tab-button.active {
+      background: #eaf3ff;
+      border-color: #0070d2;
+      color: #0070d2;
+    }
+
+    .tab-button::after {
+      content: " ▼";
+      font-size: 0.7rem;
+      margin-left: 6px;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border: 1px solid #d8dde6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      margin-top: 4px;
+      border-radius: 4px;
+      display: none;
+      min-width: 180px;
+      z-index: 999;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 12px;
+      text-decoration: none;
+      color: #16325c;
+      font-size: 0.9rem;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f4f6f9;
     }
 
     .site-title {
       font-weight: bold;
-      font-size: 16px;
+      font-size: 1rem;
+      color: #16325c;
       white-space: nowrap;
     }
 
-    /* Dropdown Menus */
-    .dropdown-menu, .launcher-menu {
-      display: none;
-      position: absolute;
-      top: 115px;
-      background: #fff;
+    .search-bar {
+      margin-left: auto;
+      margin-right: 1rem;
+    }
+
+    .search-bar input {
+      padding: 4px 8px;
       border: 1px solid #ccc;
-      border-radius: 8px;
-      min-width: 220px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 8px 0;
-      animation: fadeIn 0.15s ease-in;
+      border-radius: 4px;
     }
 
-    .dropdown-menu.visible, .launcher-menu.visible {
-      display: block;
-    }
-
-    .dropdown-menu a, .launcher-menu a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      text-decoration: none;
-      color: var(--text-light);
-      font-size: 14px;
-      border-radius: 6px;
-      transition: background-color 0.2s;
-    }
-
-    .dropdown-menu a:hover, .launcher-menu a:hover {
-      background-color: var(--hover-light-blue);
+    .logo {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
     }
 
     /* Main Content */
     .container {
-      padding: 2rem;
-    }
-
-    .card {
-      background: var(--card-background-light);
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: background 0.5s;
+      max-width: 1200px;
+      margin: 2rem auto 0 auto;
+      padding: 0 1rem;
     }
 
     .page-header {
+      margin-bottom: 2rem;
       text-align: center;
     }
 
-    .page-header img {
-      width: 140px;
-      height: auto;
-      margin-bottom: 1rem;
+    .page-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #16325c;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .page-header p {
+      margin-top: 0.5rem;
+      color: #555;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card {
+      flex: 1 1 calc(50% - 1rem);
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #16325c;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .quick-actions button {
+      margin-right: 0.5rem;
+      background: #0070d2;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .quick-actions button:hover {
+      background: #005fb2;
+    }
+
+    @media (max-width: 768px) {
+      .cards {
+        flex-direction: column;
+      }
+      .search-bar {
+        display: none;
+      }
     }
   </style>
 </head>
-
 <body>
 
-<!-- Utility Bar (Top) -->
-<div class="utility-bar">
-  <div></div>
-  <div class="search-center">
-    <input type="text" placeholder="Search...">
-  </div>
-  <div class="utility-right">
-    <label for="darkModeToggle">🌙</label>
-    <input type="checkbox" id="darkModeToggle">
-    <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
-  </div>
-</div>
-
-<!-- Main Nav Bar (Below) -->
+<!-- Navbar -->
 <header class="navbar">
-  <button id="launcherButton" class="launcher-button">
-    <div></div><div></div><div></div>
-    <div></div><div></div><div></div>
-    <div></div><div></div><div></div>
-  </button>
-
-  <div class="glitch-console">Glitch Console</div>
-
-  <button id="tabButton" class="tab-button active">Dashboard ▼</button>
-
-  <div class="site-title">The Glitch Doctor - A Salesforce-ish Site</div>
-
-  <!-- Menus -->
-  <div class="launcher-menu" id="launcherMenu">
-    <a href="#">Tool 1</a>
-    <a href="#">Tool 2</a>
-    <a href="#">Tool 3</a>
+  <div class="nav-left">
+    <button id="tabButton" class="tab-button active">Dashboard</button>
+    <div id="dropdownMenu" class="dropdown-menu">
+      <a href="#">Dashboard</a>
+      <a href="#">Calendar</a>
+      <a href="#">Tasks</a>
+      <a href="#">Clients</a>
+      <a href="#">Settings</a>
+    </div>
+    <div class="site-title">The Glitch Doctor - Salesforce-ish Site</div>
   </div>
-
-  <div class="dropdown-menu" id="dropdownMenu">
-    <a href="tel:9712606993">Call Doc</a>
-    <a href="mailto:doc@theglitchdoctor.com">Email Doc</a>
-    <a href="#">Schedule Appointment</a>
+  <div class="search-bar">
+    <input type="text" placeholder="Search..." />
   </div>
+  <img src="GlitchDoctor_NoBackground.png" class="logo" alt="Glitch Doctor Logo" />
 </header>
 
 <!-- Main Content -->
 <main class="container">
   <div class="page-header">
-    <img src="Logo1024.png" alt="Glitch Doctor Logo">
     <h1>The Glitch Doctor Dashboard</h1>
     <p>This site is under construction and will be updated frequently.</p>
   </div>
 
-  <div class="card">
-    <h2>Favorite List</h2>
-    <p>Data will appear here when available.</p>
+  <div class="cards">
+    <div class="card">
+      <h2>Favorite List</h2>
+      <p>Data will appear here when available.</p>
+    </div>
+    <div class="card quick-actions">
+      <h2>Quick Actions</h2>
+      <button type="button">Call Now</button>
+      <button type="button">Schedule Appointment</button>
+    </div>
   </div>
 </main>
 
 <script>
-// Loader display skipped since your last known good didn't have it
+  const tabButton = document.getElementById('tabButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
 
-// Launcher and Tab Menus
-const launcherButton = document.getElementById('launcherButton');
-const tabButton = document.getElementById('tabButton');
-const launcherMenu = document.getElementById('launcherMenu');
-const dropdownMenu = document.getElementById('dropdownMenu');
+  tabButton.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('show');
+  });
 
-launcherButton.addEventListener('click', function(e) {
-  e.stopPropagation();
-  launcherMenu.classList.toggle('visible');
-  dropdownMenu.classList.remove('visible');
-});
-
-tabButton.addEventListener('click', function(e) {
-  e.stopPropagation();
-  dropdownMenu.classList.toggle('visible');
-  launcherMenu.classList.remove('visible');
-});
-
-window.addEventListener('click', function() {
-  launcherMenu.classList.remove('visible');
-  dropdownMenu.classList.remove('visible');
-});
-
-// Dark Mode toggle
-const darkModeToggle = document.getElementById('darkModeToggle');
-if (localStorage.getItem('darkMode') === 'enabled') {
-  document.body.classList.add('dark-mode');
-  darkModeToggle.checked = true;
-}
-
-darkModeToggle.addEventListener('change', function() {
-  if (this.checked) {
-    document.body.classList.add('dark-mode');
-    localStorage.setItem('darkMode', 'enabled');
-  } else {
-    document.body.classList.remove('dark-mode');
-    localStorage.setItem('darkMode', 'disabled');
-  }
-});
+  window.addEventListener('click', function (e) {
+    if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
 </script>
 
 </body>
