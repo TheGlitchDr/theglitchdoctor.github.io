@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Glitch Doctor Dashboard</title>
+  <link rel="icon" href="favicon.png" type="image/png">
   <style>
     body {
       margin: 0;
@@ -11,14 +12,11 @@
       background-color: #f4f6f9;
       color: #333;
     }
-    @keyframes glitch {
-      0% { opacity: 1; transform: none; }
-      47% { opacity: 1; transform: none; }
-      48% { opacity: 0.6; transform: skewX(2deg) translateX(-2px); }
-      50% { opacity: 1; transform: none; }
-      97% { opacity: 1; transform: none; }
-      98% { opacity: 0.6; transform: skewX(-2deg) translateX(2px); }
-      100% { opacity: 1; transform: none; }
+    @keyframes jitter {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(1px, 1px); }
     }
     .navbar {
       background: #fff;
@@ -121,11 +119,11 @@
       color: #16325c;
     }
     .glitch-console {
-      margin: 0 12px;
+      margin: 0 20px 0 12px;
       font-size: 1rem;
       font-weight: bold;
       color: #16325c;
-      animation: glitch 4s infinite;
+      animation: jitter 0.5s infinite;
     }
     .site-title {
       font-weight: bold;
