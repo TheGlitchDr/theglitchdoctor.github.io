@@ -203,10 +203,14 @@ body.dark-mode .launcher-menu a:hover {
 }
 
 .page-header img {
-  max-width: 400px;
+  max-width: 300px;
   width: 100%;
   height: auto;
   margin-bottom: 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white; /* Thin white frame */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Optional nice shadow */
 }
 
 .site-title {
