@@ -5,289 +5,298 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Glitch Doctor Dashboard</title>
   <link rel="icon" href="favicon.png" type="image/png">
+
   <style>
-  :root {
-    --background-light: #f4f6f9;
-    --background-dark: #2e364a;
-    --text-light: #333;
-    --text-dark: #f4f6f9;
-    --card-background-light: #fff;
-    --card-background-dark: #3a4256;
-    --highlight-color: #0070d2;
-    --hover-light-blue: #eef4ff;
-  }
+    :root {
+      --background-light: #f4f6f9;
+      --background-dark: #2e364a;
+      --text-light: #333;
+      --text-dark: #f4f6f9;
+      --card-background-light: #fff;
+      --card-background-dark: #3a4256;
+      --highlight-color: #0070d2;
+      --hover-light-blue: #eef4ff;
+    }
 
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: var(--background-light);
-    color: var(--text-light);
-    transition: background-color 0.5s, color 0.5s;
-    animation: fadeIn 1s ease-in;
-  }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-light);
+      transition: background-color 0.5s, color 0.5s;
+      animation: fadeIn 1s ease-in;
+    }
 
-  body.dark-mode {
-    background-color: var(--background-dark);
-    color: var(--text-dark);
-  }
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-  .navbar {
-    background: #fff;
-    border-bottom: 1px solid #d8dde6;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    position: relative;
-    flex-wrap: wrap;
-  }
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #d8dde6;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      position: relative;
+      flex-wrap: wrap;
+    }
 
-  .nav-left {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-  .launcher-button, .tab-button {
-    background: #f3f6f9;
-    border: 1px solid #d8dde6;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    color: #16325c;
-    font-weight: bold;
-    cursor: pointer;
-    margin-right: 0.5rem;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-  }
+    .dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+    }
 
-  .launcher-button:hover, .tab-button:hover {
-    box-shadow: 0 0 5px rgba(0,112,210,0.5);
-  }
+    .launcher-button, .tab-button {
+      background: #f3f6f9;
+      border: 1px solid #d8dde6;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #16325c;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
 
-  .tab-button.active {
-    background: #eaf3ff;
-    border-color: #0070d2;
-    color: #0070d2;
-  }
+    .launcher-button:hover, .tab-button:hover {
+      box-shadow: 0 0 5px rgba(0,112,210,0.5);
+    }
 
-  .tab-button::after {
-    content: " ▼";
-    font-size: 0.7rem;
-    margin-left: 6px;
-  }
+    .tab-button.active {
+      background: #eaf3ff;
+      border-color: #0070d2;
+      color: #0070d2;
+    }
 
-  .launcher-icon {
-    display: grid;
-    grid-template-columns: repeat(3, 5px);
-    grid-template-rows: repeat(3, 5px);
-    gap: 3px;
-    width: 20px;
-    height: 20px;
-  }
+    .tab-button::after {
+      content: " ▼";
+      font-size: 0.7rem;
+      margin-left: 6px;
+    }
 
-  .launcher-icon div {
-    width: 5px;
-    height: 5px;
-    background-color: #16325c;
-    border-radius: 50%;
-  }
+    .launcher-icon {
+      display: grid;
+      grid-template-columns: repeat(3, 5px);
+      grid-template-rows: repeat(3, 5px);
+      gap: 3px;
+      width: 20px;
+      height: 20px;
+    }
 
-  .dropdown-menu, .launcher-menu {
-    position: absolute;
-    background: #fff;
-    border: 1px solid #d8dde6;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    border-radius: 4px;
-    min-width: 220px;
-    z-index: 999;
-    padding: 8px 0.5rem 0.5rem 0.5rem;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    pointer-events: none;
-    transition: opacity 150ms ease-out, transform 150ms ease-out, visibility 150ms;
-  }
+    .launcher-icon div {
+      width: 5px;
+      height: 5px;
+      background-color: #16325c;
+      border-radius: 50%;
+    }
 
-  .dropdown-menu.visible, .launcher-menu.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+    .dropdown-menu, .launcher-menu {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #d8dde6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      min-width: 220px;
+      z-index: 999;
+      padding: 8px 0.5rem 0.5rem 0.5rem;
+      margin-top: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 150ms ease-out, transform 150ms ease-out, visibility 150ms;
+      top: 100%;
+      left: 0;
+    }
 
-  .dropdown-menu a, .launcher-menu a {
-    display: block;
-    padding: 8px 10px;
-    text-decoration: none;
-    color: #16325c;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-radius: 4px;
-  }
+    .dropdown-menu.visible, .launcher-menu.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
 
-  .dropdown-menu a:hover, .launcher-menu a:hover {
-    background-color: var(--hover-light-blue);
-    color: #0070d2;
-  }
+    .dropdown-menu a, .launcher-menu a {
+      display: block;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: #16325c;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
 
-  .glitch-console {
-    margin: 0 20px 0 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #16325c;
-    animation: jitter 0.5s infinite;
-  }
+    .dropdown-menu a:hover, .launcher-menu a:hover {
+      background-color: var(--hover-light-blue);
+      color: #0070d2;
+    }
 
-  @keyframes jitter {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(1px, -1px); }
-    50% { transform: translate(-1px, 1px); }
-    75% { transform: translate(1px, 1px); }
-  }
+    .glitch-console {
+      margin: 0 20px 0 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #16325c;
+      animation: jitter 0.5s infinite;
+    }
 
-  @keyframes glitch {
-    0% { transform: none; opacity: 1; }
-    20% { transform: translate(-1px, 1px); opacity: 0.9; }
-    40% { transform: translate(1px, -1px); opacity: 1; }
-    60% { transform: translate(-1px, 1px); opacity: 0.95; }
-    80% { transform: translate(1px, -1px); opacity: 1; }
-    100% { transform: none; opacity: 1; }
-  }
+    @keyframes jitter {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(1px, 1px); }
+    }
 
-  .site-title {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #16325c;
-    white-space: nowrap;
-    margin-left: 1rem;
-  }
+    @keyframes glitch {
+      0% { transform: none; opacity: 1; }
+      20% { transform: translate(-1px, 1px); opacity: 0.9; }
+      40% { transform: translate(1px, -1px); opacity: 1; }
+      60% { transform: translate(-1px, 1px); opacity: 0.95; }
+      80% { transform: translate(1px, -1px); opacity: 1; }
+      100% { transform: none; opacity: 1; }
+    }
 
-  .search-bar-top {
-    margin-left: auto;
-    margin-right: 1rem;
-  }
+    .site-title {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #16325c;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
 
-  .search-bar-top input {
-    padding: 4px 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+    .search-bar-top {
+      margin-left: auto;
+      margin-right: 1rem;
+    }
 
-  .dark-mode-toggle {
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+    .search-bar-top input {
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-  .dark-mode-toggle input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-  }
+    .dark-mode-toggle {
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-  .logo {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    animation: glitch 4s infinite;
-  }
+    .dark-mode-toggle input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
 
-  .container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    text-align: center;
-  }
+    .logo {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      animation: glitch 4s infinite;
+    }
 
-  .page-header img {
-    max-width: 250px;
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-  }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
 
-  .page-header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-    color: #16325c;
-  }
+    .page-header img {
+      max-width: 250px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
 
-  .page-header p {
-    margin-top: 0.5rem;
-    color: #555;
-  }
+    .page-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #16325c;
+    }
 
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
+    .page-header p {
+      margin-top: 0.5rem;
+      color: #555;
+    }
 
-  .card {
-    flex: 1 1 calc(50% - 1rem);
-    background: var(--card-background-light);
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    padding: 1rem;
-    transition: background 0.5s, box-shadow 0.3s;
-  }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
 
-  body.dark-mode .card {
-    background: var(--card-background-dark);
-  }
+    .card {
+      flex: 1 1 calc(50% - 1rem);
+      background: var(--card-background-light);
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
+      transition: background 0.5s, box-shadow 0.3s;
+    }
 
-  .card:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
+    body.dark-mode .card {
+      background: var(--card-background-dark);
+    }
 
-  .card h2 {
-    margin-top: 0;
-    color: #16325c;
-    font-size: 1.2rem;
-  }
+    .card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
 
-  .card p {
-    color: #333;
-    font-size: 0.95rem;
-  }
+    .card h2 {
+      margin-top: 0;
+      color: #16325c;
+      font-size: 1.2rem;
+    }
 
-  .quick-actions button {
-    margin-right: 0.5rem;
-    background: #0070d2;
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
+    .card p {
+      color: #333;
+      font-size: 0.95rem;
+    }
 
-  .quick-actions button:hover {
-    background: #005fb2;
-  }
+    .quick-actions button {
+      margin-right: 0.5rem;
+      background: #0070d2;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
 
-  @media (max-width: 768px) {
-    .cards { flex-direction: column; }
-    .search-bar-top { display: none; }
-    .page-header img { max-width: 150px; }
-    .glitch-console { font-size: 0.9rem; margin: 0.5rem; }
-    .launcher-button, .tab-button { padding: 4px 8px; font-size: 0.85rem; }
-    .site-title { font-size: 0.9rem; margin-top: 0.5rem; }
-    .navbar { justify-content: center; }
-    .nav-left { justify-content: center; }
-  }
-</style>
+    .quick-actions button:hover {
+      background: #005fb2;
+    }
+
+    @media (max-width: 768px) {
+      .cards { flex-direction: column; }
+      .search-bar-top { display: none; }
+      .page-header img { max-width: 150px; }
+      .glitch-console { font-size: 0.9rem; margin: 0.5rem; }
+      .launcher-button, .tab-button { padding: 4px 8px; font-size: 0.85rem; }
+      .site-title { font-size: 0.9rem; margin-top: 0.5rem; }
+      .navbar { justify-content: center; }
+      .nav-left { justify-content: center; }
+    }
+  </style>
 </head>
-<body>
-  
+  <body>
+
 <!-- Loading Screen -->
 <div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0070d2;">
   Loading Glitch Console...
@@ -296,41 +305,52 @@
 <!-- Header -->
 <header class="navbar" style="display:none;">
   <div class="nav-left">
-    <button id="launcherButton" class="launcher-button">
-      <div class="launcher-icon">
-        <div></div><div></div><div></div>
-        <div></div><div></div><div></div>
-        <div></div><div></div><div></div>
-      </div>
-    </button>
 
-    <div class="launcher-menu" id="launcherMenu">
-      <div class="launcher-title">Favorites</div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search favorites..." disabled />
+    <!-- Launcher Button + Menu -->
+    <div class="dropdown-wrapper">
+      <button id="launcherButton" class="launcher-button">
+        <div class="launcher-icon">
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+        </div>
+      </button>
+
+      <div class="launcher-menu" id="launcherMenu">
+        <div class="launcher-title">Favorites</div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search favorites..." disabled />
+        </div>
+        <a href="#">Favorite 1</a>
+        <a href="#">Favorite 2</a>
+        <a href="#">Favorite 3</a>
+        <a href="#">Favorite 4</a>
+        <a href="#">Favorite 5</a>
       </div>
-      <a href="#">Favorite 1</a>
-      <a href="#">Favorite 2</a>
-      <a href="#">Favorite 3</a>
-      <a href="#">Favorite 4</a>
-      <a href="#">Favorite 5</a>
     </div>
 
+    <!-- Glitch Console Text -->
     <div class="glitch-console">Glitch Console</div>
 
-    <button id="tabButton" class="tab-button active">Dashboard</button>
+    <!-- Dashboard Button + Menu -->
+    <div class="dropdown-wrapper">
+      <button id="tabButton" class="tab-button active">Dashboard</button>
 
-    <div class="dropdown-menu" id="dropdownMenu">
-      <a href="#">Dashboard</a>
-      <a href="#">Calendar</a>
-      <a href="#">Tasks</a>
-      <a href="#">Clients</a>
-      <a href="#">Settings</a>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#">Dashboard</a>
+        <a href="#">Calendar</a>
+        <a href="#">Tasks</a>
+        <a href="#">Clients</a>
+        <a href="#">Settings</a>
+      </div>
     </div>
 
+    <!-- Site Title -->
     <div class="site-title">The Glitch Doctor - Salesforce-ish Site</div>
+
   </div>
 
+  <!-- Search Bar and Dark Mode Toggle -->
   <div class="search-bar-top">
     <input type="text" placeholder="Search..." />
   </div>
@@ -340,6 +360,7 @@
     <input type="checkbox" id="darkModeToggle">
   </div>
 
+  <!-- Flickering Logo -->
   <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
 </header>
 
@@ -365,7 +386,7 @@
   </div>
 </main>
 
-<!-- JavaScript to Control Menus and Theme -->
+<!-- Scripts to control behavior -->
 <script>
 window.addEventListener("load", function() {
   document.getElementById("loader").style.display = "none";
@@ -384,21 +405,21 @@ darkModeToggle.addEventListener('change', function() {
   document.body.classList.toggle('dark-mode');
 });
 
-// Open/close Dashboard Menu
+// Dashboard Menu Open/Close
 tabButton.addEventListener('click', function(e) {
   e.stopPropagation();
   dropdownMenu.classList.toggle('visible');
   launcherMenu.classList.remove('visible');
 });
 
-// Open/close Launcher Menu
+// Launcher Menu Open/Close
 launcherButton.addEventListener('click', function(e) {
   e.stopPropagation();
   launcherMenu.classList.toggle('visible');
   dropdownMenu.classList.remove('visible');
 });
 
-// Close menus if clicking outside
+// Close Menus Clicking Outside
 window.addEventListener('click', function(e) {
   if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) &&
       !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
@@ -410,3 +431,4 @@ window.addEventListener('click', function(e) {
 
 </body>
 </html>
+
