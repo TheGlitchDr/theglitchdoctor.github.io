@@ -75,7 +75,7 @@
     <p>This site is under construction and will be updated frequently.</p>
   </div>
 
-<div class="card certifications-card">
+<div class="card certifications-card" onclick="openModal()" style="cursor: pointer;">>
   <h2 style="position: relative; z-index: 2;">Admin-as-a-Service (AaaS)</h2>
   <p>Your trusted remote administrator — available when you need it, without the full-time overhead.</p>
 
@@ -205,6 +205,56 @@
     }
   });
 </script>
+
+  <script>
+function openModal() {
+  document.getElementById('contactModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('contactModal').style.display = 'none';
+}
+
+function contactAction(method) {
+  closeModal(); // close popup first
+
+  switch (method) {
+    case 'chat':
+      window.open('https://yourchatlink.com', '_blank'); // Replace with your real chat link
+      break;
+    case 'email':
+      window.location.href = 'mailto:doc@theglitchdoctor.com';
+      break;
+    case 'call':
+      window.location.href = 'tel:9712606993';
+      break;
+    case 'sms':
+      window.location.href = 'sms:9712606993';
+      break;
+    case 'schedule':
+      window.open('https://calendly.com/your-schedule-link', '_blank'); // Replace with your real scheduling link
+      break;
+    default:
+      alert("Something went wrong. Please try again.");
+  }
+}
+</script>
+
+
+  <!-- Contact Modal -->
+<div id="contactModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center;">
+  <div style="background: white; padding: 2rem; border-radius: 10px; text-align: center; width: 300px;">
+    <h3 style="margin-bottom: 1rem;">How would you like to contact The Doc?</h3>
+    <button onclick="contactAction('chat')" style="margin: 0.5rem;">💬 Chat</button>
+    <button onclick="contactAction('email')" style="margin: 0.5rem;">✉️ Email</button>
+    <button onclick="contactAction('call')" style="margin: 0.5rem;">📞 Call</button>
+    <button onclick="contactAction('sms')" style="margin: 0.5rem;">📱 SMS</button>
+    <button onclick="contactAction('schedule')" style="margin: 0.5rem;">📅 Schedule</button>
+    <br><br>
+    <button onclick="closeModal()" style="margin-top: 1rem; background-color: lightgray;">Cancel</button>
+  </div>
+</div>
+
 
 </body>
 </html>
