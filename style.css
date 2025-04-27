@@ -413,3 +413,28 @@ body.dark-mode .card {
 body.dark-mode .card:hover {
   box-shadow: 0 4px 10px rgba(255,255,255,0.2);
 }
+
+.certifications-card {
+  max-width: 600px; /* Make it narrower */
+  margin: 0 auto; /* Center it */
+  cursor: pointer; /* Show pointer on hover */
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.certifications-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.certifications-images {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.certifications-images img {
+  width: 120px; /* Control badge size */
+  height: auto;
+}
