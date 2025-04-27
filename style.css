@@ -530,7 +530,7 @@ body.dark-mode .card:hover {
 .top-navbar-right {
   flex: 0 0 auto; /* doesn't grow */
   display: flex;
-  align-items: center;
+  align-items: right;
   gap: 0.5rem;
 }
 
