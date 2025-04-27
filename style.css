@@ -398,3 +398,14 @@ body.dark-mode .footer-links a:hover {
 body.dark-mode .footer-bottom {
   color: #aaa;
 }
+
+/* Dark Mode Card */
+body.dark-mode .card {
+  background-color: var(--card-background-dark) !important;
+  color: var(--text-dark);
+  box-shadow: 0 1px 4px rgba(255,255,255,0.1);
+}
+
+body.dark-mode .card:hover {
+  box-shadow: 0 4px 10px rgba(255,255,255,0.2);
+}
