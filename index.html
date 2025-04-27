@@ -11,12 +11,21 @@
       font-family: Arial, sans-serif;
       background-color: #f4f6f9;
       color: #333;
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     @keyframes jitter {
       0%, 100% { transform: translate(0, 0); }
       25% { transform: translate(1px, -1px); }
       50% { transform: translate(-1px, 1px); }
       75% { transform: translate(1px, 1px); }
+    }
+    @keyframes buttonFade {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .navbar {
       background: #fff;
@@ -44,6 +53,7 @@
       display: flex;
       align-items: center;
       position: relative;
+      animation: buttonFade 0.5s ease-in-out;
     }
     .tab-button.active {
       background: #eaf3ff;
@@ -79,6 +89,7 @@
       min-width: 220px;
       z-index: 999;
       padding: 0.5rem;
+      animation: buttonFade 0.5s ease-in-out;
     }
     .dropdown-menu.show {
       display: block;
@@ -180,6 +191,10 @@
       border-radius: 6px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       padding: 1rem;
+      transition: box-shadow 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     .card h2 {
       margin-top: 0;
@@ -211,7 +226,10 @@
 </head>
 <body>
 
-<header class="navbar">
+<!-- Loading screen -->
+<div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0070d2;">Loading Glitch Console...</div>
+
+<header class="navbar" style="display:none;">
   <div class="nav-left">
     <button id="launcherButton" class="launcher-button">
       <div class="launcher-icon">
@@ -248,7 +266,7 @@
   <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
 </header>
 
-<main class="container">
+<main class="container" style="display:none;">
   <div class="page-header">
     <img src="Logo1024.png" alt="Glitch Doctor Logo">
     <h1>The Glitch Doctor Dashboard</h1>
@@ -269,6 +287,12 @@
 </main>
 
 <script>
+window.addEventListener("load", function() {
+  document.getElementById("loader").style.display = "none";
+  document.querySelector("header").style.display = "flex";
+  document.querySelector("main").style.display = "block";
+});
+
 const tabButton = document.getElementById('tabButton');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const launcherButton = document.getElementById('launcherButton');
