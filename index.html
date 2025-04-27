@@ -57,6 +57,7 @@
       margin-right: 0.5rem;
       display: flex;
       align-items: center;
+      transition: background-color 0.2s, color 0.2s;
     }
     .tab-button.active {
       background: #eaf3ff;
@@ -92,9 +93,14 @@
       min-width: 220px;
       z-index: 999;
       padding: 0.5rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.15s ease-out, transform 0.15s ease-out;
     }
     .dropdown-menu.show, .launcher-menu.show {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
     .dropdown-menu a, .launcher-menu a {
       display: block;
@@ -118,6 +124,14 @@
       25% { transform: translate(1px, -1px); }
       50% { transform: translate(-1px, 1px); }
       75% { transform: translate(1px, 1px); }
+    }
+    @keyframes glitch {
+      0% { transform: none; opacity: 1; }
+      20% { transform: translate(-1px, 1px); opacity: 0.9; }
+      40% { transform: translate(1px, -1px); opacity: 1; }
+      60% { transform: translate(-1px, 1px); opacity: 0.95; }
+      80% { transform: translate(1px, -1px); opacity: 1; }
+      100% { transform: none; opacity: 1; }
     }
     .site-title {
       font-weight: bold;
@@ -149,7 +163,7 @@
       height: 40px;
       width: 40px;
       border-radius: 50%;
-      animation: glitch 5s infinite;
+      animation: glitch 4s infinite;
     }
     .container {
       max-width: 1200px;
