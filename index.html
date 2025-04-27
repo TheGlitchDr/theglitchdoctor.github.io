@@ -25,7 +25,6 @@
       background-color: var(--background-light);
       color: var(--text-light);
       transition: background-color 0.5s, color 0.5s;
-      animation: fadeIn 1s ease-in;
     }
 
     body.dark-mode {
@@ -33,12 +32,7 @@
       color: var(--text-dark);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Utility Top Bar */
+    /* Top Utility Bar */
     .utility-bar {
       background: #ffffff;
       height: 50px;
@@ -79,40 +73,51 @@
       border: 1px solid #ccc;
     }
 
-    /* Main Nav */
+    /* Main Nav Bar */
     header.navbar {
       background: #f4f6f9;
-      height: 70px;
+      height: 65px;
       display: flex;
       align-items: center;
-      padding: 0 1rem;
-      justify-content: flex-start;
       gap: 20px;
+      padding: 0 1rem;
+      border-bottom: 1px solid #e0e0e0;
       position: relative;
       z-index: 1;
     }
 
-    /* Launcher + Console Name */
     .launcher-button {
       background: transparent;
       border: none;
       cursor: pointer;
-      padding: 8px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .launcher-button div {
+      width: 8px;
+      height: 8px;
+      background: var(--text-light);
+      border-radius: 50%;
     }
 
     .glitch-console {
       font-weight: bold;
       font-size: 18px;
+      white-space: nowrap;
     }
 
-    /* Dashboard dropdown */
     .tab-button {
       background: white;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 6px 10px;
-      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 20px;
       font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
     }
 
     .site-title {
@@ -125,11 +130,11 @@
     .dropdown-menu, .launcher-menu {
       display: none;
       position: absolute;
-      top: 70px;
+      top: 65px;
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 8px;
-      min-width: 200px;
+      min-width: 220px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       padding: 8px 0;
       animation: fadeIn 0.15s ease-in;
@@ -155,7 +160,7 @@
       background-color: var(--hover-light-blue);
     }
 
-    /* Card and Page */
+    /* Cards and Page */
     .container {
       padding: 2rem;
     }
@@ -182,19 +187,22 @@
       height: auto;
       margin-bottom: 1rem;
     }
-  </style>
 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
 </head>
+
 <body>
 
 <!-- Top Utility Bar -->
 <div class="utility-bar">
-  <div></div> <!-- spacer -->
-  
+  <div></div>
   <div class="search-center">
-    <input type="text" placeholder="Search..." />
+    <input type="text" placeholder="Search...">
   </div>
-
   <div class="utility-right">
     <label for="darkModeToggle">🌙</label>
     <input type="checkbox" id="darkModeToggle">
@@ -205,43 +213,35 @@
 <!-- Main Nav Bar -->
 <header class="navbar">
   <button id="launcherButton" class="launcher-button">
-    <div class="launcher-icon">
-      <div></div><div></div><div></div>
-      <div></div><div></div><div></div>
-      <div></div><div></div><div></div>
-    </div>
+    <div></div><div></div><div></div>
+    <div></div><div></div><div></div>
+    <div></div><div></div><div></div>
   </button>
 
   <div class="glitch-console">Glitch Console</div>
 
-  <button id="tabButton" class="tab-button active">Dashboard</button>
+  <button id="tabButton" class="tab-button active">Dashboard ▼</button>
 
   <div class="site-title">The Glitch Doctor - A Salesforce-ish Site</div>
 
-  <!-- Dropdowns -->
+  <!-- Menus -->
   <div class="launcher-menu" id="launcherMenu">
-    <div class="launcher-title">Tools</div>
-    <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">Data Loader Install Guide</a>
-    <a href="#">Tool 2</a>
-    <a href="#">Tool 3</a>
-    <a href="#">Tool 4</a>
+    <div class="launcher-title" style="padding: 0 12px 8px; font-weight:bold;">Tools</div>
+    <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">🛠 Data Loader Guide</a>
+    <a href="#">🔧 Tool 2</a>
+    <a href="#">🗂 Tool 3</a>
+    <a href="#">🔗 Tool 4</a>
   </div>
 
   <div class="dropdown-menu" id="dropdownMenu">
-    <a href="tel:9712606993">
-      📞 Call Doc
-    </a>
-    <a href="mailto:doc@theglitchdoctor.com">
-      ✉️ Email Doc
-    </a>
-    <a href="#">
-      📅 Schedule Appointment
-    </a>
+    <a href="tel:9712606993">📞 Call Doc</a>
+    <a href="mailto:doc@theglitchdoctor.com">✉️ Email Doc</a>
+    <a href="#">📅 Schedule Appointment</a>
   </div>
 </header>
 
 <!-- Main Content -->
-<main class="container" style="display:none;">
+<main class="container">
   <div class="page-header">
     <img src="Logo1024.png" alt="Glitch Doctor Logo">
     <h1>The Glitch Doctor Dashboard</h1>
@@ -254,14 +254,11 @@
   </div>
 </main>
 
-<!-- Scripts -->
 <script>
-// Loading
 window.addEventListener("load", function() {
   document.querySelector("main").style.display = "block";
 });
 
-// Dropdown Behavior
 const launcherButton = document.getElementById('launcherButton');
 const tabButton = document.getElementById('tabButton');
 const launcherMenu = document.getElementById('launcherMenu');
@@ -284,7 +281,7 @@ window.addEventListener('click', function() {
   dropdownMenu.classList.remove('visible');
 });
 
-// Dark Mode toggle persistence
+// Dark mode
 const darkModeToggle = document.getElementById('darkModeToggle');
 if (localStorage.getItem('darkMode') === 'enabled') {
   document.body.classList.add('dark-mode');
