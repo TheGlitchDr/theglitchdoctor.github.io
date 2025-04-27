@@ -6,6 +6,7 @@
   <title>The Glitch Doctor Dashboard</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <style>
+    /* Include all styles exactly from your working copy */
     :root {
       --background-light: #f4f6f9;
       --background-dark: #2e364a;
@@ -16,7 +17,6 @@
       --highlight-color: #0070d2;
       --hover-light-blue: #eef4ff;
     }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -25,12 +25,10 @@
       transition: background-color 0.5s, color 0.5s;
       animation: fadeIn 1s ease-in;
     }
-
     body.dark-mode {
       background-color: var(--background-dark);
       color: var(--text-dark);
     }
-
     header {
       width: 100%;
       display: flex;
@@ -39,189 +37,51 @@
       background: #fff;
       border-bottom: 1px solid #d8dde6;
     }
-
-    .search-navbar {
-      justify-content: center;
-    }
-
-    .top-navbar {
-      justify-content: flex-end;
-    }
-
-    .bottom-navbar {
-      justify-content: flex-start;
-      border-top: 1px solid #d8dde6;
-    }
-
-    .nav-left, .top-nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .search-bar-container {
-      width: 100%;
-      max-width: 600px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .search-bar-container input {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    .dropdown-wrapper {
-      position: relative;
-    }
-
-    .launcher-button, .tab-button {
-      background: #f3f6f9;
-      border: 1px solid #d8dde6;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      font-weight: bold;
-      color: #16325c;
-      cursor: pointer;
-    }
-
-    .dropdown-menu, .launcher-menu {
-      position: absolute;
-      background: #fff;
-      border: 1px solid #d8dde6;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      border-radius: 4px;
-      display: none;
-      margin-top: 5px;
-    }
-
-    .dropdown-menu.visible, .launcher-menu.visible {
-      display: block;
-    }
-
-    .glitch-console {
-      font-weight: bold;
-      color: #16325c;
-      animation: jitter 0.5s infinite;
-    }
-
-    @keyframes jitter {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(1px, -1px); }
-      50% { transform: translate(-1px, 1px); }
-      75% { transform: translate(1px, 1px); }
-    }
-
-    .site-title {
-      font-size: 1rem;
-      color: #16325c;
-    }
-
-    .search-bar-top input {
-      padding: 4px 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .dark-mode-toggle label {
-      margin-right: 5px;
-    }
-
-    .logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .page-header img {
-      max-width: 250px;
-    }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .card {
-      flex: 1 1 calc(50% - 1rem);
-      background: var(--card-background-light);
-      padding: 1rem;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+    .search-navbar { justify-content: center; }
+    .top-navbar { justify-content: flex-end; }
+    .bottom-navbar { justify-content: flex-start; border-top: 1px solid #d8dde6; }
+    .nav-left, .top-nav-right { display: flex; align-items: center; gap: 1rem; }
+    .search-bar-container { width: 100%; max-width: 600px; display: flex; justify-content: center; }
+    .search-bar-container input { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+    .dropdown-wrapper { position: relative; }
+    .launcher-button, .tab-button { background: #f3f6f9; border: 1px solid #d8dde6; padding: 6px 12px; border-radius: 4px; font-size: 0.95rem; font-weight: bold; color: #16325c; cursor: pointer; }
+    .dropdown-menu, .launcher-menu { position: absolute; background: #fff; border: 1px solid #d8dde6; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border-radius: 4px; display: none; margin-top: 5px; }
+    .dropdown-menu.visible, .launcher-menu.visible { display: block; }
+    .glitch-console { font-weight: bold; color: #16325c; animation: jitter 0.5s infinite; }
+    @keyframes jitter { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(1px, -1px); } 50% { transform: translate(-1px, 1px); } 75% { transform: translate(1px, 1px); } }
+    .site-title { font-size: 1rem; color: #16325c; }
+    .logo { width: 40px; height: 40px; border-radius: 50%; }
+    .container { max-width: 1200px; margin: 2rem auto; padding: 1rem; text-align: center; }
+    .page-header img { max-width: 250px; }
+    .cards { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .card { flex: 1 1 calc(50% - 1rem); background: var(--card-background-light); padding: 1rem; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body>
-<div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0070d2;">
-  Loading Glitch Console...
-</div>
-
-<header class="navbar search-navbar" style="display:none;">
-  <div class="search-bar-container">
-    <input type="text" placeholder="Search...">
-  </div>
-</header>
-
-<header class="navbar top-navbar" style="display:none;">
-  <div class="top-nav-right">
-    <div class="dark-mode-toggle">
-      <label for="darkModeToggle">🌙</label>
-      <input type="checkbox" id="darkModeToggle">
-    </div>
-    <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
-  </div>
-</header>
-
+<div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0070d2;">Loading Glitch Console...</div>
+<header class="navbar search-navbar" style="display:none;"><div class="search-bar-container"><input type="text" placeholder="Search..."></div></header>
+<header class="navbar top-navbar" style="display:none;"><div class="top-nav-right"><div class="dark-mode-toggle"><label for="darkModeToggle">🌙</label><input type="checkbox" id="darkModeToggle"></div><img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo"></div></header>
 <header class="navbar bottom-navbar" style="display:none;">
   <div class="nav-left">
-    <div class="dropdown-wrapper">
-      <button id="launcherButton" class="launcher-button">Tools</button>
+    <div class="dropdown-wrapper"><button id="launcherButton" class="launcher-button">Tools</button>
       <div class="launcher-menu" id="launcherMenu">
         <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">Data Loader Install Guide</a>
-        <a href="#">Tool 2</a>
-        <a href="#">Tool 3</a>
+        <a href="#">Tool 2</a><a href="#">Tool 3</a>
       </div>
     </div>
     <div class="glitch-console">Glitch Console</div>
-    <div class="dropdown-wrapper">
-      <button id="tabButton" class="tab-button active">Dashboard</button>
+    <div class="dropdown-wrapper"><button id="tabButton" class="tab-button active">Dashboard</button>
       <div class="dropdown-menu" id="dropdownMenu">
-        <a href="tel:9712606993">📞 Call Doc</a>
-        <a href="mailto:doc@theglitchdoctor.com">✉️ Email Doc</a>
-        <a href="#">📅 Schedule Appointment</a>
+        <a href="tel:9712606993">📞 Call Doc</a><a href="mailto:doc@theglitchdoctor.com">✉️ Email Doc</a><a href="#">📅 Schedule Appointment</a>
       </div>
     </div>
     <div class="site-title">The Glitch Doctor - A Salesforce-ish Site</div>
   </div>
 </header>
-
 <main class="container" style="display:none;">
-  <div class="page-header">
-    <img src="Logo1024.png" alt="Glitch Doctor Logo">
-    <h1>The Glitch Doctor Dashboard</h1>
-    <p>This site is under construction and will be updated frequently.</p>
-  </div>
-  <div class="cards">
-    <div class="card">
-      <h2>Favorite List</h2>
-      <p>Data will appear here when available.</p>
-    </div>
-  </div>
+  <div class="page-header"><img src="Logo1024.png" alt="Glitch Doctor Logo"><h1>The Glitch Doctor Dashboard</h1><p>This site is under construction and will be updated frequently.</p></div>
+  <div class="cards"><div class="card"><h2>Favorite List</h2><p>Data will appear here when available.</p></div></div>
 </main>
-
 <script>
 window.addEventListener("load", function() {
   document.getElementById("loader").style.display = "none";
@@ -230,40 +90,21 @@ window.addEventListener("load", function() {
   document.querySelector(".bottom-navbar").style.display = "flex";
   document.querySelector("main").style.display = "block";
 });
-
 const tabButton = document.getElementById('tabButton');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const launcherButton = document.getElementById('launcherButton');
 const launcherMenu = document.getElementById('launcherMenu');
 const darkModeToggle = document.getElementById('darkModeToggle');
-
 if (localStorage.getItem('darkMode') === 'enabled') {
   document.body.classList.add('dark-mode');
   darkModeToggle.checked = true;
 }
-
 darkModeToggle.addEventListener('change', function() {
-  if (this.checked) {
-    document.body.classList.add('dark-mode');
-    localStorage.setItem('darkMode', 'enabled');
-  } else {
-    document.body.classList.remove('dark-mode');
-    localStorage.setItem('darkMode', 'disabled');
-  }
+  if (this.checked) { document.body.classList.add('dark-mode'); localStorage.setItem('darkMode', 'enabled'); }
+  else { document.body.classList.remove('dark-mode'); localStorage.setItem('darkMode', 'disabled'); }
 });
-
-tabButton.addEventListener('click', function(e) {
-  e.stopPropagation();
-  dropdownMenu.classList.toggle('visible');
-  launcherMenu.classList.remove('visible');
-});
-
-launcherButton.addEventListener('click', function(e) {
-  e.stopPropagation();
-  launcherMenu.classList.toggle('visible');
-  dropdownMenu.classList.remove('visible');
-});
-
+tabButton.addEventListener('click', function(e) { e.stopPropagation(); dropdownMenu.classList.toggle('visible'); launcherMenu.classList.remove('visible'); });
+launcherButton.addEventListener('click', function(e) { e.stopPropagation(); launcherMenu.classList.toggle('visible'); dropdownMenu.classList.remove('visible'); });
 window.addEventListener('click', function(e) {
   if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) && !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
     dropdownMenu.classList.remove('visible');
