@@ -471,38 +471,29 @@ body.dark-mode .card:hover {
   color: #333333;
 }
 
-.contact-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0.4rem;
-  padding: 0.6rem 1.2rem;
-  background-color: #0070d2;
-  color: white;
+.modal-button {
+  background-color: var(--highlight-color);
   border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.contact-button:hover {
-  background-color: #005bb5;
+.modal-button:hover {
+  background-color: #005fb2; /* darker highlight on hover */
+  transform: translateY(-2px);
 }
 
 .cancel-button {
-  margin-top: 1.5rem;
-  padding: 0.6rem 1.2rem;
-  background: #cccccc;
-  color: #333333;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: #7f8c8d; /* lighter neutral color */
 }
 
 .cancel-button:hover {
-  background: #999999;
+  background-color: #5d6d72;
 }
 
 /* Animations */
