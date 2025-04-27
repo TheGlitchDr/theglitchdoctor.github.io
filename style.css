@@ -532,7 +532,7 @@ body.dark-mode .card:hover {
   display: flex;
   align-items: center;
   gap: 0.2rem;
-  padding-right: 1rem; /* <-- ADD THIS */
+  padding-right: 2rem;
 }
 
 .top-search-bar {
