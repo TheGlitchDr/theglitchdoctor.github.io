@@ -506,3 +506,39 @@ body.dark-mode .card:hover {
   from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+/* Top Navbar */
+.top-navbar {
+  width: 100%;
+  background: linear-gradient(90deg, #eef4ff 0%, #f4f6f9 100%);
+  border-bottom: 1px solid #d8dde6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+.top-navbar-content {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+}
+
+.top-search-bar {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 9999px; /* full pill shape */
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.top-search-bar:focus {
+  outline: none;
+  border-color: var(--highlight-color);
+  box-shadow: 0 0 8px rgba(0,112,210,0.4);
+}
