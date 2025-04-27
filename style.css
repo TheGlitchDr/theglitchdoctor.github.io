@@ -1,0 +1,358 @@
+  <style>
+    :root {
+      --background-light: #f4f6f9;
+      --background-dark: #2e364a;
+      --text-light: #333;
+      --text-dark: #f4f6f9;
+      --card-background-light: #ffffff;
+      --card-background-dark: #3a4256;
+      --highlight-color: #0070d2;
+      --hover-light-blue: #eef4ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-light);
+      transition: background-color 0.5s, color 0.5s;
+      animation: fadeIn 1s ease-in;
+    }
+
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode, 
+    body.dark-mode a, 
+    body.dark-mode p, 
+    body.dark-mode h1, 
+    body.dark-mode h2, 
+    body.dark-mode h3, 
+    body.dark-mode h4, 
+    body.dark-mode .card p {
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .dropdown-menu,
+    body.dark-mode .launcher-menu {
+      background-color: var(--card-background-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .dropdown-menu a,
+    body.dark-mode .launcher-menu a {
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .dropdown-menu a:hover,
+    body.dark-mode .launcher-menu a:hover {
+      background-color: var(--highlight-color);
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Dropdown style improvements */
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      text-decoration: none;
+      font-size: 14px;
+      color: inherit;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--hover-light-blue);
+    }
+
+    /* Basic card style */
+    .card {
+      background: var(--card-background-light);
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.5s;
+    }
+
+    body.dark-mode .card {
+      background: var(--card-background-dark);
+    }
+
+    /* Logo in center */
+    .page-header {
+      text-align: center;
+      margin: 2rem 0 1rem;
+    }
+
+    .page-header img {
+      width: 140px;
+      height: auto;
+    }
+
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #d8dde6;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .launcher-button, .tab-button {
+      background: #f3f6f9;
+      border: 1px solid #d8dde6;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #16325c;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .launcher-button:hover, .tab-button:hover {
+      box-shadow: 0 0 5px rgba(0,112,210,0.5);
+    }
+
+    .tab-button.active {
+      background: #eaf3ff;
+      border-color: #0070d2;
+      color: #0070d2;
+    }
+
+    .tab-button::after {
+      content: " ▼";
+      font-size: 0.7rem;
+      margin-left: 6px;
+    }
+
+    .launcher-icon {
+      display: grid;
+      grid-template-columns: repeat(3, 5px);
+      grid-template-rows: repeat(3, 5px);
+      gap: 3px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .launcher-icon div {
+      width: 5px;
+      height: 5px;
+      background-color: #16325c;
+      border-radius: 50%;
+    }
+
+    .dropdown-menu, .launcher-menu {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #d8dde6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      min-width: 220px;
+      z-index: 999;
+      padding: 8px 0.5rem 0.5rem 0.5rem;
+      margin-top: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 150ms ease-out, transform 150ms ease-out, visibility 150ms;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown-menu.visible, .launcher-menu.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown-menu a, .launcher-menu a {
+      display: block;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: #16325c;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .dropdown-menu a:hover, .launcher-menu a:hover {
+      background-color: var(--hover-light-blue);
+      color: #0070d2;
+    }
+
+    .glitch-console {
+      margin: 0 20px 0 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #16325c;
+      animation: jitter 0.5s infinite;
+    }
+
+    @keyframes jitter {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(1px, 1px); }
+    }
+
+    @keyframes glitch {
+      0% { transform: none; opacity: 1; }
+      20% { transform: translate(-1px, 1px); opacity: 0.9; }
+      40% { transform: translate(1px, -1px); opacity: 1; }
+      60% { transform: translate(-1px, 1px); opacity: 0.95; }
+      80% { transform: translate(1px, -1px); opacity: 1; }
+      100% { transform: none; opacity: 1; }
+    }
+
+    .site-title {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #16325c;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+
+    .search-bar-top {
+      margin-left: auto;
+      margin-right: 1rem;
+    }
+
+    .search-bar-top input {
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .dark-mode-toggle {
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dark-mode-toggle input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+
+    .logo {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      animation: glitch 4s infinite;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    .page-header img {
+      max-width: 250px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #16325c;
+    }
+
+    .page-header p {
+      margin-top: 0.5rem;
+      color: #555;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .card {
+      flex: 1 1 calc(50% - 1rem);
+      background: var(--card-background-light);
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
+      transition: background 0.5s, box-shadow 0.3s;
+    }
+
+    body.dark-mode .card {
+      background: var(--card-background-dark);
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #16325c;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .quick-actions button {
+      margin-right: 0.5rem;
+      background: #0070d2;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .quick-actions button:hover {
+      background: #005fb2;
+    }
+
+    @media (max-width: 768px) {
+      .cards { flex-direction: column; }
+      .search-bar-top { display: none; }
+      .page-header img { max-width: 150px; }
+      .glitch-console { font-size: 0.9rem; margin: 0.5rem; }
+      .launcher-button, .tab-button { padding: 4px 8px; font-size: 0.85rem; }
+      .site-title { font-size: 0.9rem; margin-top: 0.5rem; }
+      .navbar { justify-content: center; }
+      .nav-left { justify-content: center; }
+    }
+  </style>
