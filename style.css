@@ -522,9 +522,10 @@ body.dark-mode .card:hover {
 }
 
 .top-navbar-center {
-  flex: 1 1 auto; /* fills available space */
+  flex: 1 1 auto;
   display: flex;
   justify-content: center;
+  padding: 0 2rem; /* NEW! Add horizontal padding */
 }
 
 .top-navbar-right {
