@@ -513,17 +513,27 @@ body.dark-mode .card:hover {
   background: linear-gradient(90deg, #eef4ff 0%, #f4f6f9 100%);
   border-bottom: 1px solid #d8dde6;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
   position: relative;
 }
 
-.top-navbar-content {
-  width: 100%;
-  max-width: 600px;
+.top-navbar-left,
+.top-navbar-center,
+.top-navbar-right {
+  flex: 1;
   display: flex;
+  align-items: center;
+}
+
+.top-navbar-center {
   justify-content: center;
+}
+
+.top-navbar-right {
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
 .top-search-bar {
@@ -531,7 +541,7 @@ body.dark-mode .card:hover {
   max-width: 400px;
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
-  border-radius: 9999px; /* full pill shape */
+  border-radius: 9999px; /* pill shape */
   font-size: 1rem;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
