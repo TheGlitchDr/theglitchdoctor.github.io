@@ -31,46 +31,122 @@
       color: var(--text-dark);
     }
 
-    body.dark-mode, body.dark-mode a, body.dark-mode p, body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode .card p {
-      color: var(--text-dark);
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
     }
 
     .top-navbar {
-      display: flex;
       justify-content: flex-end;
       background: #fff;
-      padding: 0.3rem 1rem;
+      border-bottom: 1px solid #d8dde6;
     }
 
     .bottom-navbar {
-      display: flex;
       justify-content: flex-start;
       background: #fff;
-      padding: 0.5rem 1rem;
       border-top: 1px solid #d8dde6;
     }
 
-    .top-nav-right {
+    .nav-left, .top-nav-right {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-left: auto;
     }
 
-    .nav-left {
+    .dropdown-wrapper {
+      position: relative;
+    }
+
+    .launcher-button, .tab-button {
+      background: #f3f6f9;
+      border: 1px solid #d8dde6;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #16325c;
+      cursor: pointer;
+    }
+
+    .dropdown-menu, .launcher-menu {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #d8dde6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      display: none;
+      margin-top: 5px;
+    }
+
+    .dropdown-menu.visible, .launcher-menu.visible {
+      display: block;
+    }
+
+    .glitch-console {
+      font-weight: bold;
+      color: #16325c;
+      animation: jitter 0.5s infinite;
+    }
+
+    @keyframes jitter {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(1px, 1px); }
+    }
+
+    .site-title {
+      font-size: 1rem;
+      color: #16325c;
+    }
+
+    .search-bar-top input {
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .dark-mode-toggle label {
+      margin-right: 5px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .page-header img {
+      max-width: 250px;
+    }
+
+    .cards {
       display: flex;
-      align-items: center;
       flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
     }
 
-    /* Additional styles from previous setup */
-    .launcher-button, .tab-button, .dropdown-menu, .launcher-menu, .glitch-console, .site-title, .search-bar-top input, .dark-mode-toggle input[type="checkbox"], .logo, .container, .page-header img, .cards, .card, .quick-actions button {
-      /* Existing styles from your page */
+    .card {
+      flex: 1 1 calc(50% - 1rem);
+      background: var(--card-background-light);
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-
 <div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0070d2;">
   Loading Glitch Console...
 </div>
@@ -78,14 +154,12 @@
 <header class="navbar top-navbar" style="display:none;">
   <div class="top-nav-right">
     <div class="search-bar-top">
-      <input type="text" placeholder="Search..." />
+      <input type="text" placeholder="Search...">
     </div>
-
     <div class="dark-mode-toggle">
       <label for="darkModeToggle">🌙</label>
       <input type="checkbox" id="darkModeToggle">
     </div>
-
     <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
   </div>
 </header>
@@ -93,36 +167,22 @@
 <header class="navbar bottom-navbar" style="display:none;">
   <div class="nav-left">
     <div class="dropdown-wrapper">
-      <button id="launcherButton" class="launcher-button">
-        <div class="launcher-icon">
-          <div></div><div></div><div></div>
-          <div></div><div></div><div></div>
-          <div></div><div></div><div></div>
-        </div>
-      </button>
-
+      <button id="launcherButton" class="launcher-button">Tools</button>
       <div class="launcher-menu" id="launcherMenu">
-        <div class="launcher-title">Tools</div>
         <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">Data Loader Install Guide</a>
         <a href="#">Tool 2</a>
         <a href="#">Tool 3</a>
-        <a href="#">Tool 4</a>
-        <a href="#">Tool 5</a>
       </div>
     </div>
-
     <div class="glitch-console">Glitch Console</div>
-
     <div class="dropdown-wrapper">
       <button id="tabButton" class="tab-button active">Dashboard</button>
-
       <div class="dropdown-menu" id="dropdownMenu">
         <a href="tel:9712606993">📞 Call Doc</a>
         <a href="mailto:doc@theglitchdoctor.com">✉️ Email Doc</a>
-        <a href="#" id="scheduleLink">📅 Schedule Appointment</a>
+        <a href="#">📅 Schedule Appointment</a>
       </div>
     </div>
-
     <div class="site-title">The Glitch Doctor - A Salesforce-ish Site</div>
   </div>
 </header>
@@ -133,7 +193,6 @@
     <h1>The Glitch Doctor Dashboard</h1>
     <p>This site is under construction and will be updated frequently.</p>
   </div>
-
   <div class="cards">
     <div class="card">
       <h2>Favorite List</h2>
@@ -184,13 +243,11 @@ launcherButton.addEventListener('click', function(e) {
 });
 
 window.addEventListener('click', function(e) {
-  if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) &&
-      !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
+  if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) && !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
     dropdownMenu.classList.remove('visible');
     launcherMenu.classList.remove('visible');
   }
 });
 </script>
-
 </body>
 </html>
