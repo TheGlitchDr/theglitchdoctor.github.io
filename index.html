@@ -7,6 +7,7 @@
   <link rel="icon" href="favicon.png" type="image/png">
 
   <style>
+    /* Your original CSS */
     :root {
       --background-light: #f4f6f9;
       --background-dark: #2e364a;
@@ -32,30 +33,20 @@
       color: var(--text-dark);
     }
 
-    body.dark-mode, 
-    body.dark-mode a, 
-    body.dark-mode p, 
-    body.dark-mode h1, 
-    body.dark-mode h2, 
-    body.dark-mode h3, 
-    body.dark-mode h4, 
-    body.dark-mode .card p {
+    body.dark-mode, body.dark-mode a, body.dark-mode p, body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode .card p {
       color: var(--text-dark);
     }
 
-    body.dark-mode .dropdown-menu,
-    body.dark-mode .launcher-menu {
+    body.dark-mode .dropdown-menu, body.dark-mode .launcher-menu {
       background-color: var(--card-background-dark);
       color: var(--text-dark);
     }
 
-    body.dark-mode .dropdown-menu a,
-    body.dark-mode .launcher-menu a {
+    body.dark-mode .dropdown-menu a, body.dark-mode .launcher-menu a {
       color: var(--text-dark);
     }
 
-    body.dark-mode .dropdown-menu a:hover,
-    body.dark-mode .launcher-menu a:hover {
+    body.dark-mode .dropdown-menu a:hover, body.dark-mode .launcher-menu a:hover {
       background-color: var(--highlight-color);
       color: white;
     }
@@ -294,88 +285,12 @@
       .navbar { justify-content: center; }
       .nav-left { justify-content: center; }
     }
-
-    /* Footer */
-    .site-footer {
-      background-color: #f3f6f9;
-      border-top: 1px solid #d8dde6;
-      padding: 2rem 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #16325c;
-      transition: background-color 0.5s, color 0.5s;
-    }
-
-    .site-footer .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-logo img {
-      height: 50px;
-      margin-bottom: 1rem;
-    }
-
-    .footer-links {
-      margin-bottom: 1rem;
-    }
-
-    .footer-links a {
-      margin: 0 12px;
-      color: #0070d2;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover {
-      color: #005fb2;
-      text-decoration: underline;
-    }
-
-    .social-icons {
-      margin-top: 0.5rem;
-    }
-
-    .social-icons a img {
-      width: 24px;
-      height: 24px;
-      margin: 0 5px;
-      filter: grayscale(100%);
-      transition: filter 0.3s;
-    }
-
-    .social-icons a:hover img {
-      filter: none;
-    }
-
-    .footer-copy {
-      font-size: 0.8rem;
-      color: #555;
-    }
-
-    body.dark-mode .site-footer {
-      background-color: #2e364a;
-      color: #f4f6f9;
-    }
-
-    body.dark-mode .footer-links a {
-      color: #f4f6f9;
-    }
-
-    body.dark-mode .footer-links a:hover {
-      color: #c0d4f2;
-    }
-
-    body.dark-mode .footer-copy {
-      color: #aaa;
-    }
   </style>
 </head>
-<body>
 
+<body>
 <!-- Header -->
-<header class="navbar" style="display:none;">
+<header class="navbar" style="display: none;">
   <div class="nav-left">
 
     <!-- Launcher Button + Tools Menu -->
@@ -390,7 +305,6 @@
 
       <div class="launcher-menu" id="launcherMenu">
         <div class="launcher-title">Tools</div>
-
         <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">
           Data Loader Install Guide
         </a>
@@ -415,6 +329,7 @@
     </div>
 
     <div class="site-title">The Glitch Doctor - A Salesforce-ish Site</div>
+
   </div>
 
   <div class="search-bar-top">
@@ -430,9 +345,7 @@
 </header>
 
 <!-- Main Content -->
-<main class="container" style="display:none;">
-
-  <!-- Dashboard Title + Main Page -->
+<main class="container" style="display: none;">
   <div class="page-header">
     <img src="Logo1024.png" alt="Glitch Doctor Logo">
     <h1>The Glitch Doctor Dashboard</h1>
@@ -443,66 +356,85 @@
     <div class="card">
       <h2>Current Salesforce Certifications</h2>
       <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-      <img src="2022-08_Badge_SF-Certified_Administrator_500x490px.png" alt="2022 Certified Administrator" width="140" height="137">
-      <img src="2021-03_Badge_SF-Certified_Administrator_500x490px.png" alt="2021 Certified Administrator" width="140" height="137">
-      <img src="2023-07_Badge_SF-Certified_AI-Associate_500x490px.png" alt="2023 Certified AI Associate" width="140" height="137">
+        <img src="2022-08_Badge_SF-Certified_Administrator_500x490px.png" alt="2022 Certified Administrator" width="140" height="137">
+        <img src="2021-03_Badge_SF-Certified_Administrator_500x490px.png" alt="2021 Certified Administrator" width="140" height="137">
+        <img src="2023-07_Badge_SF-Certified_AI-Associate_500x490px.png" alt="2023 Certified AI Associate" width="140" height="137">
       </div>
     </div>
   </div>
-
 </main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <img src="GlitchDoctor_NoBackground.png" alt="The Glitch Doctor Logo">
+    </div>
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="mailto:doc@theglitchdoctor.com">Contact</a>
+      <a href="https://developer.salesforce.com" target="_blank">Salesforce Developer</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/company/the-glitch-doctor/?viewAsMember=true" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+      </a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2025 The Glitch Doctor. Powered by Salesforce Enthusiasm 🚀
+    </div>
+  </div>
+</footer>
 
 <!-- Behavior Scripts -->
 <script>
-// Loading
-window.addEventListener("load", function() {
-  document.querySelector("header").style.display = "flex";
-  document.querySelector("main").style.display = "block";
-});
+  window.addEventListener("load", function() {
+    document.getElementById("loader").style.display = "none";
+    document.querySelector("header").style.display = "flex";
+    document.querySelector("main").style.display = "block";
+  });
 
-// Menus
-const tabButton = document.getElementById('tabButton');
-const dropdownMenu = document.getElementById('dropdownMenu');
-const launcherButton = document.getElementById('launcherButton');
-const launcherMenu = document.getElementById('launcherMenu');
+  const tabButton = document.getElementById('tabButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  const launcherButton = document.getElementById('launcherButton');
+  const launcherMenu = document.getElementById('launcherMenu');
 
-// Dark Mode Memory
-const darkModeToggle = document.getElementById('darkModeToggle');
-if (localStorage.getItem('darkMode') === 'enabled') {
-  document.body.classList.add('dark-mode');
-  darkModeToggle.checked = true;
-}
-
-darkModeToggle.addEventListener('change', function() {
-  if (this.checked) {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (localStorage.getItem('darkMode') === 'enabled') {
     document.body.classList.add('dark-mode');
-    localStorage.setItem('darkMode', 'enabled');
-  } else {
-    document.body.classList.remove('dark-mode');
-    localStorage.setItem('darkMode', 'disabled');
+    darkModeToggle.checked = true;
   }
-});
 
-// Dropdown Menus
-tabButton.addEventListener('click', function(e) {
-  e.stopPropagation();
-  dropdownMenu.classList.toggle('visible');
-  launcherMenu.classList.remove('visible');
-});
+  darkModeToggle.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
+    }
+  });
 
-launcherButton.addEventListener('click', function(e) {
-  e.stopPropagation();
-  launcherMenu.classList.toggle('visible');
-  dropdownMenu.classList.remove('visible');
-});
-
-window.addEventListener('click', function(e) {
-  if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) &&
-      !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
-    dropdownMenu.classList.remove('visible');
+  tabButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('visible');
     launcherMenu.classList.remove('visible');
-  }
-});
+  });
+
+  launcherButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    launcherMenu.classList.toggle('visible');
+    dropdownMenu.classList.remove('visible');
+  });
+
+  window.addEventListener('click', function(e) {
+    if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) &&
+        !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
+      dropdownMenu.classList.remove('visible');
+      launcherMenu.classList.remove('visible');
+    }
+  });
 </script>
 
 </body>
