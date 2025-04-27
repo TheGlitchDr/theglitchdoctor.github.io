@@ -19,6 +19,7 @@
       display: flex;
       align-items: center;
       padding: 0.3rem 1rem;
+      position: relative;
     }
 
     .nav-left {
@@ -27,7 +28,7 @@
       position: relative;
     }
 
-    .tab-button {
+    .launcher-button, .tab-button {
       background: #f3f6f9;
       border: 1px solid #d8dde6;
       padding: 6px 12px;
@@ -36,9 +37,10 @@
       color: #16325c;
       font-weight: bold;
       cursor: pointer;
-      margin-right: 1rem;
+      margin-right: 0.5rem;
       display: flex;
       align-items: center;
+      position: relative;
     }
 
     .tab-button.active {
@@ -53,34 +55,70 @@
       margin-left: 6px;
     }
 
-    .dropdown-menu {
+    /* Launcher icon (9 dots) */
+    .launcher-icon {
+      display: grid;
+      grid-template-columns: repeat(3, 5px);
+      grid-template-rows: repeat(3, 5px);
+      gap: 3px;
+      width: 20px;
+      height: 20px;
+    }
+    .launcher-icon div {
+      width: 5px;
+      height: 5px;
+      background-color: #16325c;
+      border-radius: 50%;
+    }
+
+    .dropdown-menu, .launcher-menu {
       position: absolute;
-      top: 100%;
-      left: 0;
       background: #fff;
       border: 1px solid #d8dde6;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      margin-top: 4px;
       border-radius: 4px;
       display: none;
-      min-width: 180px;
+      min-width: 220px;
       z-index: 999;
+      padding: 0.5rem;
     }
 
-    .dropdown-menu.show {
+    .dropdown-menu.show, .launcher-menu.show {
       display: block;
     }
 
-    .dropdown-menu a {
+    .dropdown-menu a, .launcher-menu a {
       display: block;
-      padding: 8px 12px;
+      padding: 8px 10px;
       text-decoration: none;
       color: #16325c;
       font-size: 0.9rem;
     }
 
-    .dropdown-menu a:hover {
+    .dropdown-menu a:hover, .launcher-menu a:hover {
       background-color: #f4f6f9;
+    }
+
+    /* Launcher-specific styling */
+    .launcher-menu {
+      top: 50px;
+      left: 10px;
+      width: 260px;
+    }
+    .launcher-menu .search-bar {
+      margin-bottom: 0.5rem;
+    }
+    .launcher-menu .search-bar input {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .launcher-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #16325c;
     }
 
     .site-title {
@@ -88,14 +126,15 @@
       font-size: 1rem;
       color: #16325c;
       white-space: nowrap;
+      margin-left: 1rem;
     }
 
-    .search-bar {
+    .search-bar-top {
       margin-left: auto;
       margin-right: 1rem;
     }
 
-    .search-bar input {
+    .search-bar-top input {
       padding: 4px 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -174,7 +213,7 @@
       .cards {
         flex-direction: column;
       }
-      .search-bar {
+      .search-bar-top {
         display: none;
       }
     }
@@ -185,7 +224,32 @@
 <!-- Navbar -->
 <header class="navbar">
   <div class="nav-left">
+    <!-- Launcher Button -->
+    <button id="launcherButton" class="launcher-button">
+      <div class="launcher-icon">
+        <div></div><div></div><div></div>
+        <div></div><div></div><div></div>
+        <div></div><div></div><div></div>
+      </div>
+    </button>
+
+    <!-- Launcher Dropdown -->
+    <div id="launcherMenu" class="launcher-menu">
+      <div class="launcher-title">Favorites</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search favorites..." disabled />
+      </div>
+      <a href="#">Favorite 1</a>
+      <a href="#">Favorite 2</a>
+      <a href="#">Favorite 3</a>
+      <a href="#">Favorite 4</a>
+      <a href="#">Favorite 5</a>
+    </div>
+
+    <!-- Dashboard Button -->
     <button id="tabButton" class="tab-button active">Dashboard</button>
+
+    <!-- Dashboard Dropdown -->
     <div id="dropdownMenu" class="dropdown-menu">
       <a href="#">Dashboard</a>
       <a href="#">Calendar</a>
@@ -193,11 +257,14 @@
       <a href="#">Clients</a>
       <a href="#">Settings</a>
     </div>
+
     <div class="site-title">The Glitch Doctor - Salesforce-ish Site</div>
   </div>
-  <div class="search-bar">
+
+  <div class="search-bar-top">
     <input type="text" placeholder="Search..." />
   </div>
+
   <img src="GlitchDoctor_NoBackground.png" class="logo" alt="Glitch Doctor Logo" />
 </header>
 
@@ -224,15 +291,26 @@
 <script>
   const tabButton = document.getElementById('tabButton');
   const dropdownMenu = document.getElementById('dropdownMenu');
+  const launcherButton = document.getElementById('launcherButton');
+  const launcherMenu = document.getElementById('launcherMenu');
 
   tabButton.addEventListener('click', function (e) {
     e.stopPropagation();
     dropdownMenu.classList.toggle('show');
+    launcherMenu.classList.remove('show');
+  });
+
+  launcherButton.addEventListener('click', function (e) {
+    e.stopPropagation();
+    launcherMenu.classList.toggle('show');
+    dropdownMenu.classList.remove('show');
   });
 
   window.addEventListener('click', function (e) {
-    if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+    if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) &&
+        !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
       dropdownMenu.classList.remove('show');
+      launcherMenu.classList.remove('show');
     }
   });
 </script>
