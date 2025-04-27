@@ -8,231 +8,236 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f6f9; /* light gray background similar to Salesforce Lightning */
+      background-color: #f4f6f9;
       color: #333;
     }
-    /* Top Navigation Bar */
-    .top-bar {
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-      padding: 0.5rem 1rem;
+
+    /* Navigation Bar */
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #d8dde6;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      padding: 0.3rem 1rem;
     }
-    /* Nav left (Dashboard dropdown and site title) */
+
     .nav-left {
       display: flex;
       align-items: center;
     }
-    .nav-left .dropdown-toggle {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
-      padding: 0.3rem 0.75rem;
-      font-size: 1rem;
-      color: #333;
+
+    .tab-button {
+      background: #f3f6f9;
+      border: 1px solid #d8dde6;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #16325c;
+      font-weight: bold;
       cursor: pointer;
-      margin-right: 0.75rem;
       position: relative;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
     }
-    .nav-left .dropdown-toggle::after {
-      content: "\\25BE"; /* down triangle arrow */
-      margin-left: 0.5rem;
-      font-size: 0.6rem;
-    }
-    .nav-left .dropdown-toggle.active {
-      background-color: #eaf3ff; /* light blue highlight when active */
+
+    .tab-button.active {
+      background: #eaf3ff;
       border-color: #0070d2;
       color: #0070d2;
-      font-weight: bold;
     }
-    .site-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      white-space: nowrap;
+
+    .tab-button::after {
+      content: "▼";
+      font-size: 0.7rem;
+      margin-left: 8px;
     }
-    /* Search bar */
-    .search-bar {
-      margin-right: 1rem;
-      flex-grow: 1;
-      max-width: 250px;
-      position: relative;
-    }
-    .search-bar input[type="text"] {
-      width: 100%;
-      padding: 0.3rem 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
-    }
-    /* Top right logo image */
-    .logo {
-      height: 40px;
-      width: auto;
-      border-radius: 50%;
-    }
-    /* Dropdown menu styling */
+
     .dropdown-menu {
       position: absolute;
       top: 100%;
       left: 0;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 0.25rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      width: 200px;
+      background: #fff;
+      border: 1px solid #d8dde6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      margin-top: 4px;
+      border-radius: 4px;
       display: none;
-      z-index: 1000;
-      padding: 0.5rem 0;
+      min-width: 180px;
+      z-index: 999;
     }
+
     .dropdown-menu.show {
       display: block;
     }
+
     .dropdown-menu a {
       display: block;
-      padding: 0.4rem 1rem;
+      padding: 8px 12px;
       text-decoration: none;
-      color: #333;
-      font-size: 0.95rem;
+      color: #16325c;
+      font-size: 0.9rem;
     }
+
     .dropdown-menu a:hover {
       background-color: #f4f6f9;
     }
-    .dropdown-menu a.active {
+
+    .site-title {
       font-weight: bold;
-      color: #0070d2;
-      background-color: #eaf3ff;
+      font-size: 1rem;
+      color: #16325c;
+      white-space: nowrap;
     }
-    /* Main content container */
+
+    .search-bar {
+      margin-left: auto;
+      margin-right: 1rem;
+    }
+
+    .search-bar input {
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .logo {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+    }
+
+    /* Main Content */
     .container {
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
+      margin: 2rem auto 0 auto;
+      padding: 0 1rem;
     }
+
     .page-header {
-      margin: 2rem 0 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
     }
+
     .page-header h1 {
       margin: 0;
-      font-size: 1.5rem;
-      color: #16325c; /* dark slate color for heading */
+      font-size: 1.8rem;
+      color: #16325c;
     }
+
     .page-header p {
-      margin: 0.5rem 0 0;
-      font-size: 0.9rem;
+      margin-top: 0.5rem;
       color: #555;
     }
-    /* Card layout for sections */
+
     .cards {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
     }
+
     .card {
-      background-color: #fff;
-      border-radius: 0.25rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      padding: 1rem;
       flex: 1 1 calc(50% - 1rem);
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
     }
+
     .card h2 {
-      font-size: 1.1rem;
       margin-top: 0;
-      margin-bottom: 0.5rem;
       color: #16325c;
+      font-size: 1.2rem;
     }
+
     .card p {
-      font-size: 0.9rem;
       color: #333;
-      margin: 0;
+      font-size: 0.95rem;
     }
-    /* Quick Actions section buttons */
+
     .quick-actions button {
-      background-color: #007bff;
-      border: none;
-      color: #fff;
-      padding: 0.5rem 1rem;
       margin-right: 0.5rem;
-      border-radius: 0.25rem;
+      background: #0070d2;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
       font-size: 0.9rem;
       cursor: pointer;
     }
-    .quick-actions button:last-child {
-      margin-right: 0;
-    }
+
     .quick-actions button:hover {
-      background-color: #0056b3;
+      background: #005fb2;
     }
-    /* Responsive adjustments for mobile */
+
     @media (max-width: 768px) {
+      .cards {
+        flex-direction: column;
+      }
       .search-bar {
-        display: none; /* hide search on small screens */
-      }
-      .site-title {
-        display: none; /* hide site title on small screens */
-      }
-      .card {
-        flex: 1 1 100%;
+        display: none;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Top Navigation Bar -->
-  <header class="top-bar">
-    <div class="nav-left">
-      <div class="dropdown">
-        <button id="navDropdownButton" class="dropdown-toggle active">Dashboard</button>
-        <div id="navDropdownMenu" class="dropdown-menu">
-          <a href="#" class="active">Dashboard</a>
-          <a href="#">Calendar</a>
-          <a href="#">Tasks</a>
-          <a href="#">Clients</a>
-          <a href="#">Settings</a>
-        </div>
-      </div>
-      <div class="site-title">The Glitch Doctor - Salesforce-ish Site</div>
-    </div>
-    <div class="nav-right" style="display:flex; align-items:center;">
-      <div class="search-bar">
-        <input type="text" placeholder="Search..." />
-      </div>
-      <img src="GlitchDoctor_NoBackground.png" alt="Glitch Doctor Logo" class="logo" />
-    </div>
-  </header>
 
-  <!-- Main Content -->
-  <main class="container">
-    <div class="page-header">
-      <h1>The Glitch Doctor Dashboard</h1>
-      <p>This site is under construction and will be updated frequently.</p>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <h2>Favorite List</h2>
-        <p>Data will appear here when available.</p>
-      </div>
-      <div class="card quick-actions">
-        <h2>Quick Actions</h2>
-        <button type="button">Call Now</button>
-        <button type="button">Schedule Appointment</button>
+<!-- Navbar -->
+<header class="navbar">
+  <div class="nav-left">
+    <div class="dropdown">
+      <button id="tabButton" class="tab-button active">Dashboard</button>
+      <div id="dropdownMenu" class="dropdown-menu">
+        <a href="#">Dashboard</a>
+        <a href="#">Calendar</a>
+        <a href="#">Tasks</a>
+        <a href="#">Clients</a>
+        <a href="#">Settings</a>
       </div>
     </div>
-  </main>
+    <div class="site-title">The Glitch Doctor - Salesforce-ish Site</div>
+  </div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search..." />
+  </div>
+  <img src="GlitchDoctor_NoBackground.png" class="logo" alt="Glitch Doctor Logo" />
+</header>
 
-  <!-- Script for dropdown functionality -->
-  <script>
-    document.addEventListener('click', function(event) {
-      var dropdownButton = document.getElementById('navDropdownButton');
-      var dropdownMenu = document.getElementById('navDropdownMenu');
-      if (dropdownButton.contains(event.target)) {
-        // Toggle the dropdown menu when clicking the Dashboard button
-        dropdownMenu.classList.toggle('show');
-      } else {
-        // Close the dropdown menu for any click outside or on a menu item
-        dropdownMenu.classList.remove('show');
-      }
-    });
-  </script>
+<!-- Main Content -->
+<main class="container">
+  <div class="page-header">
+    <h1>The Glitch Doctor Dashboard</h1>
+    <p>This site is under construction and will be updated frequently.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h2>Favorite List</h2>
+      <p>Data will appear here when available.</p>
+    </div>
+    <div class="card quick-actions">
+      <h2>Quick Actions</h2>
+      <button type="button">Call Now</button>
+      <button type="button">Schedule Appointment</button>
+    </div>
+  </div>
+</main>
+
+<script>
+  const tabButton = document.getElementById('tabButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
+
+  tabButton.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('show');
+  });
+
+  window.addEventListener('click', function (e) {
+    if (!tabButton.contains(e.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+</script>
+
 </body>
 </html>
