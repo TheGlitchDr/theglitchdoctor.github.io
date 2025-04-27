@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glitch Doctor - Dashboard</title>
+  <title>The Glitch Doctor Dashboard</title>
   <link rel="icon" href="favicon.png" type="image/png">
 
   <style>
@@ -12,7 +12,7 @@
       --background-dark: #2e364a;
       --text-light: #333;
       --text-dark: #f4f6f9;
-      --card-background-light: #fff;
+      --card-background-light: #ffffff;
       --card-background-dark: #3a4256;
       --highlight-color: #0070d2;
       --hover-light-blue: #eef4ff;
@@ -32,7 +32,7 @@
       color: var(--text-dark);
     }
 
-    /* Important: force text and links light in dark mode */
+    /* Force all text readable in dark mode */
     body.dark-mode, 
     body.dark-mode a, 
     body.dark-mode p, 
@@ -44,11 +44,29 @@
       color: var(--text-dark);
     }
 
+    /* Fix dropdowns in dark mode */
+    body.dark-mode .dropdown-menu,
+    body.dark-mode .launcher-menu {
+      background-color: var(--card-background-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .dropdown-menu a,
+    body.dark-mode .launcher-menu a {
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .dropdown-menu a:hover,
+    body.dark-mode .launcher-menu a:hover {
+      background-color: var(--highlight-color);
+      color: white;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
+    
     .navbar {
       background: #fff;
       border-bottom: 1px solid #d8dde6;
@@ -339,7 +357,6 @@
         <a href="#">Tool 3</a>
         <a href="#">Tool 4</a>
         <a href="#">Tool 5</a>
-
       </div>
     </div>
 
@@ -404,7 +421,7 @@ window.addEventListener("load", function() {
   document.querySelector("main").style.display = "block";
 });
 
-// Launcher and Dashboard Menus
+// Menu Toggles
 const tabButton = document.getElementById('tabButton');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const launcherButton = document.getElementById('launcherButton');
@@ -413,7 +430,7 @@ const launcherMenu = document.getElementById('launcherMenu');
 // Dark Mode Toggle + Persistence
 const darkModeToggle = document.getElementById('darkModeToggle');
 
-// Check if user has dark mode saved
+// Check localStorage for saved dark mode preference
 if (localStorage.getItem('darkMode') === 'enabled') {
   document.body.classList.add('dark-mode');
   darkModeToggle.checked = true;
@@ -430,21 +447,19 @@ darkModeToggle.addEventListener('change', function() {
   }
 });
 
-// Dashboard Menu Toggle
+// Dropdown Menu Behavior
 tabButton.addEventListener('click', function(e) {
   e.stopPropagation();
   dropdownMenu.classList.toggle('visible');
   launcherMenu.classList.remove('visible');
 });
 
-// Launcher Menu Toggle
 launcherButton.addEventListener('click', function(e) {
   e.stopPropagation();
   launcherMenu.classList.toggle('visible');
   dropdownMenu.classList.remove('visible');
 });
 
-// Close Menus Clicking Outside
 window.addEventListener('click', function(e) {
   if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) &&
       !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
