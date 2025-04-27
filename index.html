@@ -1,192 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Glitch Doctor Dashboard</title>
   <style>
     body {
       margin: 0;
-      background-color: #f4f6f9;
       font-family: Arial, sans-serif;
+      background-color: #f4f6f9; /* light gray background similar to Salesforce Lightning */
       color: #333;
     }
-    .navbar {
-      background-color: #ffffff;
+    /* Top Navigation Bar */
+    .top-bar {
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
       padding: 0.5rem 1rem;
       display: flex;
       align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      justify-content: space-between;
+    }
+    /* Nav left (Dashboard dropdown and site title) */
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+    .nav-left .dropdown-toggle {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      padding: 0.3rem 0.75rem;
+      font-size: 1rem;
+      color: #333;
+      cursor: pointer;
+      margin-right: 0.75rem;
       position: relative;
     }
-    .menu-button {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      position: relative;
+    .nav-left .dropdown-toggle::after {
+      content: "\\25BE"; /* down triangle arrow */
+      margin-left: 0.5rem;
+      font-size: 0.6rem;
+    }
+    .nav-left .dropdown-toggle.active {
+      background-color: #eaf3ff; /* light blue highlight when active */
+      border-color: #0070d2;
+      color: #0070d2;
       font-weight: bold;
     }
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 10px;
-      background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      border-radius: 5px;
-      overflow: hidden;
-      z-index: 1000;
-      min-width: 200px;
+    .site-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      white-space: nowrap;
     }
-    .dropdown a {
-      display: flex;
-      align-items: center;
-      padding: 0.75rem 1rem;
+    /* Search bar */
+    .search-bar {
+      margin-right: 1rem;
+      flex-grow: 1;
+      max-width: 250px;
+      position: relative;
+    }
+    .search-bar input[type="text"] {
+      width: 100%;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+    }
+    /* Top right logo image */
+    .logo {
+      height: 40px;
+      width: auto;
+      border-radius: 50%;
+    }
+    /* Dropdown menu styling */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      width: 200px;
+      display: none;
+      z-index: 1000;
+      padding: 0.5rem 0;
+    }
+    .dropdown-menu.show {
+      display: block;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.4rem 1rem;
       text-decoration: none;
       color: #333;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
-    .dropdown a:hover {
-      background-color: #f0f7ff;
+    .dropdown-menu a:hover {
+      background-color: #f4f6f9;
     }
-    .dropdown a span {
-      margin-right: 0.5rem;
-      font-size: 1.2rem;
-    }
-    .navbar .title {
-      flex-grow: 1;
+    .dropdown-menu a.active {
       font-weight: bold;
-      font-size: 1.2rem;
-      margin-left: 1rem;
+      color: #0070d2;
+      background-color: #eaf3ff;
     }
-    .navbar .search {
-      margin-right: 1rem;
-      flex-grow: 2;
+    /* Main content container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
     }
-    .navbar input[type="text"] {
-      width: 100%;
-      padding: 0.3rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    .page-header {
+      margin: 2rem 0 1.5rem;
     }
-    .profile {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #0070d2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .profile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .dashboard-header {
-      padding: 2rem 1rem 1rem 1rem;
-      text-align: center;
-    }
-    .dashboard-header h1 {
+    .page-header h1 {
       margin: 0;
-      font-size: 2rem;
+      font-size: 1.5rem;
+      color: #16325c; /* dark slate color for heading */
     }
-    .dashboard-header p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
+    .page-header p {
+      margin: 0.5rem 0 0;
+      font-size: 0.9rem;
       color: #555;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Card layout for sections */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
-      padding: 1rem;
     }
     .card {
-      background-color: #ffffff;
+      background-color: #fff;
+      border-radius: 0.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex: 1 1 calc(50% - 1rem);
     }
     .card h2 {
+      font-size: 1.1rem;
       margin-top: 0;
-      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #16325c;
     }
-    .quick-actions a {
-      display: inline-block;
-      margin: 0.5rem 0.25rem;
-      padding: 0.75rem 1.25rem;
-      background-color: #00a1e0;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
+    .card p {
+      font-size: 0.9rem;
+      color: #333;
+      margin: 0;
     }
-    .quick-actions a:hover {
-      background-color: #0070d2;
+    /* Quick Actions section buttons */
+    .quick-actions button {
+      background-color: #007bff;
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      margin-right: 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .quick-actions button:last-child {
+      margin-right: 0;
+    }
+    .quick-actions button:hover {
+      background-color: #0056b3;
+    }
+    /* Responsive adjustments for mobile */
+    @media (max-width: 768px) {
+      .search-bar {
+        display: none; /* hide search on small screens */
+      }
+      .site-title {
+        display: none; /* hide site title on small screens */
+      }
+      .card {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
 <body>
-
-<div class="navbar">
-  <div class="menu-container">
-    <div class="menu-button" onclick="toggleDropdown()">Menu ▼</div>
-    <div class="dropdown" id="dropdown">
-      <a href="#"><span>❓</span>Information</a>
-      <a href="#"><span>📆</span>Schedule Time</a>
-      <a href="#"><span>💬</span>Chat</a>
-      <a href="#"><span>✉️</span>Email</a>
-      <a href="#"><span>🛠</span>Tools</a>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="nav-left">
+      <div class="dropdown">
+        <button id="navDropdownButton" class="dropdown-toggle active">Dashboard</button>
+        <div id="navDropdownMenu" class="dropdown-menu">
+          <a href="#" class="active">Dashboard</a>
+          <a href="#">Calendar</a>
+          <a href="#">Tasks</a>
+          <a href="#">Clients</a>
+          <a href="#">Settings</a>
+        </div>
+      </div>
+      <div class="site-title">The Glitch Doctor - Salesforce-ish Site</div>
     </div>
-  </div>
-  <div class="title">The Glitch Doctor - Salesforce-ish Site</div>
-  <div class="search">
-    <input type="text" placeholder="Search...">
-  </div>
-  <div class="profile" title="The Glitch Doctor">
-    <img src="GlitchDoctor_NoBackground.png" alt="The Glitch Doctor Logo">
-  </div>
-</div>
+    <div class="nav-right" style="display:flex; align-items:center;">
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." />
+      </div>
+      <img src="GlitchDoctor_NoBackground.png" alt="Glitch Doctor Logo" class="logo" />
+    </div>
+  </header>
 
-<div class="dashboard-header">
-  <h1>The Glitch Doctor Dashboard</h1>
-  <p>This site is under construction and will be updated frequently.</p>
-</div>
+  <!-- Main Content -->
+  <main class="container">
+    <div class="page-header">
+      <h1>The Glitch Doctor Dashboard</h1>
+      <p>This site is under construction and will be updated frequently.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h2>Favorite List</h2>
+        <p>Data will appear here when available.</p>
+      </div>
+      <div class="card quick-actions">
+        <h2>Quick Actions</h2>
+        <button type="button">Call Now</button>
+        <button type="button">Schedule Appointment</button>
+      </div>
+    </div>
+  </main>
 
-<div class="grid">
-  <div class="card">
-    <h2>Favorite List</h2>
-    <p>Data will appear here when available.</p>
-  </div>
-  <div class="card quick-actions">
-    <h2>Quick Actions</h2>
-    <a href="tel:+19712606993">Call Now</a>
-    <a href="#">Schedule Appointment</a>
-  </div>
-</div>
-
-<script>
-  function toggleDropdown() {
-    const dropdown = document.getElementById('dropdown');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-  }
-
-  window.onclick = function(event) {
-    if (!event.target.matches('.menu-button')) {
-      const dropdowns = document.getElementsByClassName('dropdown');
-      for (let i = 0; i < dropdowns.length; i++) {
-        let openDropdown = dropdowns[i];
-        if (openDropdown.style.display === 'block') {
-          openDropdown.style.display = 'none';
-        }
+  <!-- Script for dropdown functionality -->
+  <script>
+    document.addEventListener('click', function(event) {
+      var dropdownButton = document.getElementById('navDropdownButton');
+      var dropdownMenu = document.getElementById('navDropdownMenu');
+      if (dropdownButton.contains(event.target)) {
+        // Toggle the dropdown menu when clicking the Dashboard button
+        dropdownMenu.classList.toggle('show');
+      } else {
+        // Close the dropdown menu for any click outside or on a menu item
+        dropdownMenu.classList.remove('show');
       }
-    }
-  }
-</script>
-
+    });
+  </script>
 </body>
 </html>
