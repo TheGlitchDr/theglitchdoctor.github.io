@@ -6,6 +6,7 @@
   <title>The Glitch Doctor Dashboard</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <style>
+    /* Root colors and light/dark themes */
     :root {
       --background-light: #f4f6f9;
       --background-dark: #2e364a;
@@ -31,33 +32,34 @@
       color: var(--text-dark);
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* NAVIGATION BARS */
     header {
       width: 100%;
       display: flex;
       align-items: center;
       padding: 0.5rem 1rem;
+      background: #fff;
     }
 
     .top-navbar {
       justify-content: flex-end;
-      background: #fff;
       border-bottom: 1px solid #d8dde6;
     }
 
     .bottom-navbar {
       justify-content: flex-start;
-      background: #fff;
       border-top: 1px solid #d8dde6;
     }
 
-    .nav-left, .top-nav-right {
+    .top-nav-right, .nav-left {
       display: flex;
       align-items: center;
       gap: 1rem;
-    }
-
-    .dropdown-wrapper {
-      position: relative;
     }
 
     .launcher-button, .tab-button {
@@ -69,20 +71,116 @@
       font-weight: bold;
       color: #16325c;
       cursor: pointer;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .launcher-button:hover, .tab-button:hover {
+      background: var(--hover-light-blue);
+      box-shadow: 0 0 6px rgba(0,112,210,0.5);
+    }
+
+    .tab-button.active {
+      background: #eaf3ff;
+      border-color: #0070d2;
+      color: #0070d2;
+    }
+
+    /* Launcher 9-dot icon */
+    .launcher-icon {
+      display: grid;
+      grid-template-columns: repeat(3, 5px);
+      grid-template-rows: repeat(3, 5px);
+      gap: 3px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .launcher-icon div {
+      width: 5px;
+      height: 5px;
+      background-color: #16325c;
+      border-radius: 50%;
     }
 
     .dropdown-menu, .launcher-menu {
       position: absolute;
+      top: 100%;
+      left: 0;
       background: #fff;
       border: 1px solid #d8dde6;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       border-radius: 4px;
+      min-width: 200px;
       display: none;
+      z-index: 10;
       margin-top: 5px;
     }
 
     .dropdown-menu.visible, .launcher-menu.visible {
       display: block;
+    }
+
+    .dropdown-menu a, .launcher-menu a {
+      display: block;
+      padding: 8px 12px;
+      text-decoration: none;
+      color: #16325c;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+
+    .dropdown-menu a:hover, .launcher-menu a:hover {
+      background: var(--hover-light-blue);
+      color: #0070d2;
+    }
+
+    .search-bar-top input {
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .dark-mode-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    /* Main content */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .page-header img {
+      max-width: 250px;
+      margin-bottom: 1rem;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .card {
+      flex: 1 1 calc(50% - 1rem);
+      background: var(--card-background-light);
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.3s;
     }
 
     .glitch-console {
@@ -103,49 +201,13 @@
       color: #16325c;
     }
 
-    .search-bar-top input {
-      padding: 4px 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .dark-mode-toggle label {
-      margin-right: 5px;
-    }
-
-    .logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .page-header img {
-      max-width: 250px;
-    }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .card {
-      flex: 1 1 calc(50% - 1rem);
-      background: var(--card-background-light);
-      padding: 1rem;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    @media (max-width: 768px) {
+      .cards { flex-direction: column; }
+      .top-navbar, .bottom-navbar { flex-direction: column; }
     }
   </style>
 </head>
+
 <body>
 <div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0070d2;">
   Loading Glitch Console...
@@ -167,14 +229,22 @@
 <header class="navbar bottom-navbar" style="display:none;">
   <div class="nav-left">
     <div class="dropdown-wrapper">
-      <button id="launcherButton" class="launcher-button">Tools</button>
+      <button id="launcherButton" class="launcher-button">
+        <div class="launcher-icon">
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+        </div>
+      </button>
       <div class="launcher-menu" id="launcherMenu">
         <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">Data Loader Install Guide</a>
         <a href="#">Tool 2</a>
         <a href="#">Tool 3</a>
       </div>
     </div>
+
     <div class="glitch-console">Glitch Console</div>
+
     <div class="dropdown-wrapper">
       <button id="tabButton" class="tab-button active">Dashboard</button>
       <div class="dropdown-menu" id="dropdownMenu">
@@ -183,6 +253,7 @@
         <a href="#">📅 Schedule Appointment</a>
       </div>
     </div>
+
     <div class="site-title">The Glitch Doctor - A Salesforce-ish Site</div>
   </div>
 </header>
