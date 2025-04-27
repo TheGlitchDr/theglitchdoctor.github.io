@@ -285,6 +285,88 @@
       .navbar { justify-content: center; }
       .nav-left { justify-content: center; }
     }
+    .site-footer {
+  background: linear-gradient(180deg, #eef4ff 0%, #f4f6f9 100%);
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid #d8dde6;
+  margin-top: 3rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.footer-logo {
+  height: 50px;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links a {
+  color: #0070d2;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #005fb2;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+.social-icon:hover {
+  filter: grayscale(0%);
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  margin-top: 1rem;
+}
+    body.dark-mode .site-footer {
+  background: linear-gradient(180deg, #2e364a 0%, #3a4256 100%);
+  color: #f4f6f9;
+}
+
+body.dark-mode .footer-links a {
+  color: #f4f6f9;
+}
+
+body.dark-mode .footer-links a:hover {
+  color: #c0d4f2;
+}
+
+body.dark-mode .footer-bottom {
+  color: #aaa;
+}
   </style>
 </head>
 
@@ -369,23 +451,23 @@
 
 <!-- Footer -->
 <footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-logo">
-      <img src="GlitchDoctor_NoBackground.png" alt="The Glitch Doctor Logo">
+  <div class="footer-container">
+    <div class="footer-top">
+      <img src="GlitchDoctor_NoBackground.png" alt="The Glitch Doctor Logo" class="footer-logo">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="mailto:doc@theglitchdoctor.com">Contact</a>
+        <a href="https://developer.salesforce.com" target="_blank">Salesforce Developer</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/company/the-glitch-doctor/?viewAsMember=true" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Icon" class="social-icon">
+        </a>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="#">Home</a>
-      <a href="mailto:doc@theglitchdoctor.com">Contact</a>
-      <a href="https://developer.salesforce.com" target="_blank">Salesforce Developer</a>
-      <a href="#">Privacy Policy</a>
-    </div>
-    <div class="social-icons">
-      <a href="https://www.linkedin.com/company/the-glitch-doctor/?viewAsMember=true" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-      </a>
-    </div>
-    <div class="footer-copy">
-      &copy; 2025 The Glitch Doctor. Powered by Salesforce Enthusiasm 🚀
+    <div class="footer-bottom">
+      &copy; 2025 The Glitch Doctor. Built with 💙 Salesforce enthusiasm.
     </div>
   </div>
 </footer>
