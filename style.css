@@ -516,17 +516,14 @@ body.dark-mode .card:hover {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  position: relative;
 }
 
 .top-navbar-left,
 .top-navbar-center,
 .top-navbar-right {
-  justify-content: flex-end;
-  align-items: center; /* <-- Center vertically */
-  gap: 0.75rem; /* <-- Add nice space between toggle and logo */
-  padding-right: 1rem; /* <-- Add padding so logo doesn’t touch edge */
-  min-width: 120px; /* <-- Prevent squishing */
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .top-navbar-center {
@@ -535,21 +532,34 @@ body.dark-mode .card:hover {
 
 .top-navbar-right {
   justify-content: flex-end;
-  gap: 1rem;
+}
+
+.top-navbar-toggle-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .top-search-bar {
   width: 100%;
   max-width: 400px;
   padding: 0.5rem 1rem;
-  border: 1px solid #d8dde6; /* Light grey border */
-  border-radius: 4px; /* ← THIS is the correct Salesforce style */
+  border: 1px solid #d8dde6;
+  border-radius: 4px; /* Salesforce style */
   font-size: 1rem;
   background-color: #ffffff;
 }
 
 .top-search-bar:focus {
   outline: none;
-  border-color: var(--highlight-color); /* your Salesforce blue */
-  box-shadow: 0 0 4px rgba(0,112,210,0.4); /* optional slight glow */
+  border-color: var(--highlight-color);
+  box-shadow: 0 0 4px rgba(0,112,210,0.4);
+}
+
+/* Resize logo smaller to match toggle size */
+.top-navbar-profile .logo {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
 }
