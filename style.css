@@ -558,8 +558,8 @@ body.dark-mode .card:hover {
 
 /* Resize logo smaller to match toggle size */
 .top-navbar-profile .logo {
-  height: 32px;
-  width: 32px;
+  height: 42px;
+  width: 42px;
   border-radius: 50%;
   object-fit: cover;
 }
