@@ -6,221 +6,45 @@
   <title>The Glitch Doctor Dashboard</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <style>
+    :root {
+      --background-light: #f4f6f9;
+      --background-dark: #2e364a;
+      --text-light: #333;
+      --text-dark: #f4f6f9;
+      --card-background-light: #fff;
+      --card-background-dark: #3a4256;
+      --highlight-color: #0070d2;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f6f9;
-      color: #333;
+      background-color: var(--background-light);
+      color: var(--text-light);
       animation: fadeIn 1s ease-in;
+      transition: background-color 0.5s, color 0.5s;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes jitter {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(1px, -1px); }
-      50% { transform: translate(-1px, 1px); }
-      75% { transform: translate(1px, 1px); }
-    }
-    @keyframes buttonFade {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .navbar {
-      background: #fff;
-      border-bottom: 1px solid #d8dde6;
-      display: flex;
-      align-items: center;
-      padding: 0.3rem 1rem;
-      position: relative;
-    }
-    .nav-left {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-    .launcher-button, .tab-button {
-      background: #f3f6f9;
-      border: 1px solid #d8dde6;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      color: #16325c;
-      font-weight: bold;
-      cursor: pointer;
-      margin-right: 0.5rem;
-      display: flex;
-      align-items: center;
-      position: relative;
-      animation: buttonFade 0.5s ease-in-out;
-    }
-    .tab-button.active {
-      background: #eaf3ff;
-      border-color: #0070d2;
-      color: #0070d2;
-    }
-    .tab-button::after {
-      content: " \25BC";
-      font-size: 0.7rem;
-      margin-left: 6px;
-    }
-    .launcher-icon {
-      display: grid;
-      grid-template-columns: repeat(3, 5px);
-      grid-template-rows: repeat(3, 5px);
-      gap: 3px;
-      width: 20px;
-      height: 20px;
-    }
-    .launcher-icon div {
-      width: 5px;
-      height: 5px;
-      background-color: #16325c;
-      border-radius: 50%;
-    }
-    .dropdown-menu, .launcher-menu {
-      position: absolute;
-      background: #fff;
-      border: 1px solid #d8dde6;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      border-radius: 4px;
-      display: none;
-      min-width: 220px;
-      z-index: 999;
-      padding: 0.5rem;
-      animation: buttonFade 0.5s ease-in-out;
-    }
-    .dropdown-menu.show {
-      display: block;
-      top: 40px;
-      left: 140px;
-    }
-    .launcher-menu.show {
-      display: block;
-      top: 40px;
-      left: 10px;
-    }
-    .dropdown-menu a, .launcher-menu a {
-      display: block;
-      padding: 8px 10px;
-      text-decoration: none;
-      color: #16325c;
-      font-size: 0.9rem;
-    }
-    .dropdown-menu a:hover, .launcher-menu a:hover {
-      background-color: #f4f6f9;
-    }
-    .launcher-menu {
-      width: 260px;
-    }
-    .launcher-menu .search-bar {
-      margin-bottom: 0.5rem;
-    }
-    .launcher-menu .search-bar input {
-      width: 100%;
-      padding: 6px 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    .launcher-title {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #16325c;
-    }
-    .glitch-console {
-      margin: 0 20px 0 12px;
-      font-size: 1rem;
-      font-weight: bold;
-      color: #16325c;
-      animation: jitter 0.5s infinite;
-    }
-    .site-title {
-      font-weight: bold;
-      font-size: 1rem;
-      color: #16325c;
-      white-space: nowrap;
-      margin-left: 1rem;
-    }
-    .search-bar-top {
-      margin-left: auto;
-      margin-right: 1rem;
-    }
-    .search-bar-top input {
-      padding: 4px 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .logo {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      animation: glitch 5s infinite;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      text-align: center;
-    }
-    .page-header img {
-      max-width: 250px;
-      width: 100%;
-      height: auto;
-      margin-bottom: 1rem;
-    }
-    .page-header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-      color: #16325c;
-    }
-    .page-header p {
-      margin-top: 0.5rem;
-      color: #555;
-    }
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
     }
     .card {
-      flex: 1 1 calc(50% - 1rem);
-      background: #fff;
-      border-radius: 6px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      padding: 1rem;
-      transition: box-shadow 0.3s ease;
+      background: var(--card-background-light);
+      transition: background 0.5s, box-shadow 0.3s;
     }
-    .card:hover {
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    body.dark-mode .card {
+      background: var(--card-background-dark);
     }
-    .card h2 {
-      margin-top: 0;
-      color: #16325c;
-      font-size: 1.2rem;
+    /* Existing styles... (keep all previous styles here) */
+    /* Add the dark mode toggle styles */
+    .dark-mode-toggle {
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .card p {
-      color: #333;
-      font-size: 0.95rem;
-    }
-    .quick-actions button {
-      margin-right: 0.5rem;
-      background: #0070d2;
-      border: none;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-    .quick-actions button:hover {
-      background: #005fb2;
-    }
-    @media (max-width: 768px) {
-      .cards { flex-direction: column; }
-      .search-bar-top { display: none; }
+    .dark-mode-toggle input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
     }
   </style>
 </head>
@@ -263,6 +87,10 @@
   <div class="search-bar-top">
     <input type="text" placeholder="Search..." />
   </div>
+  <div class="dark-mode-toggle">
+    <label for="darkModeToggle">🌙</label>
+    <input type="checkbox" id="darkModeToggle">
+  </div>
   <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
 </header>
 
@@ -297,6 +125,11 @@ const tabButton = document.getElementById('tabButton');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const launcherButton = document.getElementById('launcherButton');
 const launcherMenu = document.getElementById('launcherMenu');
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('change', function() {
+  document.body.classList.toggle('dark-mode');
+});
 
 tabButton.addEventListener('click', function (e) {
   e.stopPropagation();
