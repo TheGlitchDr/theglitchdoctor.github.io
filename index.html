@@ -12,17 +12,16 @@
 <!-- Loader (fixes your site not displaying) -->
 <div id="loader" style="display: none;"></div>
 
-  
 <!-- Header -->
 <!-- Top Navbar -->
 <div class="top-navbar">
   <div class="top-navbar-left"></div> <!-- Empty -->
 
-<div class="top-navbar-center">
-  <form action="https://www.google.com/search" method="GET" target="_blank" style="width: 100%; max-width: 400px;">
-    <input type="text" name="q" placeholder="Search..." class="top-search-bar" />
-  </form>
-</div>
+  <div class="top-navbar-center">
+    <form action="https://www.google.com/search" method="GET" target="_blank" style="width: 100%; max-width: 400px;">
+      <input type="text" name="q" placeholder="Search..." class="top-search-bar" />
+    </form>
+  </div>
 
   <div class="top-navbar-right">
     <div class="dark-mode-toggle">
@@ -32,10 +31,9 @@
     <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
   </div>
 </div>
-  
+
 <header class="navbar" style="display: none;">
   <div class="nav-left">
-
     <!-- Launcher Button + Tools Menu -->
     <div class="dropdown-wrapper">
       <button id="launcherButton" class="launcher-button">
@@ -64,13 +62,12 @@
     <div class="dropdown-wrapper">
       <button id="tabButton" class="tab-button active">CONTACT</button>
 
-    <div class="dropdown-menu" id="dropdownMenu">
-      <a href="tel:9712606993" target="_blank">📞 Call - (971)260-6993</a>
-      <a href="#" onclick="launchTeamsChat(); return false;">💬 Chat</a>
-      <a href="mailto:doc@theglitchdoctor.com" target="_blank">✉️ Email</a>
-      <a href="sms:9712606993" target="_blank">📱 Text/SMS - (971)260-6993</a>
-      <a href="https://calendly.com/YOUR-CALENDLY-LINK" target="_blank">📅 Schedule Appointment</a>
-    </div>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="tel:9712606993" target="_blank">📞 Call - (971)260-6993</a>
+        <a href="mailto:doc@theglitchdoctor.com" target="_blank">✉️ Email</a>
+        <a href="sms:9712606993" target="_blank">📱 Text/SMS - (971)260-6993</a>
+        <a href="https://calendly.com/YOUR-CALENDLY-LINK" target="_blank">📅 Schedule Appointment</a>
+      </div>
     </div>
   </div>
 </header>
@@ -122,18 +119,18 @@
   </p>
 </section>
 
-  <div class="card certifications-card">
+<div class="card certifications-card">
   <a href="https://www.salesforce.com/trailblazer/jlytle" target="_blank" style="text-decoration:none; color: inherit;">
     <h2>Current Salesforce Certifications</h2>
     <div class="certifications-images">
-        <img src="2022-08_Badge_SF-Certified_Administrator_500x490px.png" alt="2022 Certified Administrator" width="75" height="73">
-        <img src="2021-03_Badge_SF-Certified_Administrator_500x490px.png" alt="2021 Certified Administrator" width="75" height="73">
-        <img src="2023-07_Badge_SF-Certified_AI-Associate_500x490px.png" alt="2023 Certified AI Associate" width="75" height="73">
-      </div>
+      <img src="2022-08_Badge_SF-Certified_Administrator_500x490px.png" alt="2022 Certified Administrator" width="75" height="73">
+      <img src="2021-03_Badge_SF-Certified_Administrator_500x490px.png" alt="2021 Certified Administrator" width="75" height="73">
+      <img src="2023-07_Badge_SF-Certified_AI-Associate_500x490px.png" alt="2023 Certified AI Associate" width="75" height="73">
     </div>
-  </div>
-  
-  <div class="card certifications-card">
+  </a>
+</div>
+
+<div class="card certifications-card">
   <h2>About The Glitch Doctor</h2>
   <p>Over 16 years of experience supporting and delivering cloud-based solutions for businesses.</p>
 
@@ -148,7 +145,6 @@
     Passionate about innovation, efficiency, and elevating user experiences.
   </p>
 </div>
-  
 </main>
 
 <!-- Footer -->
@@ -221,27 +217,6 @@
       launcherMenu.classList.remove('visible');
     }
   });
-</script>
-
-<!-- ONLY THIS for Teams Chat -->
-<script>
-function launchTeamsChat() {
-  if (document.getElementById('teams-chat-script')) {
-    console.log('Teams Chat already loaded.');
-    return;
-  }
-
-  console.log('Launching Teams Chat...');
-  const script = document.createElement('script');
-  script.id = 'teams-chat-script';
-  script.src = 'https://teams.microsoft.com/widget/ChatWidget.js';
-  script.setAttribute('data-name', 'Doc'); 
-  script.setAttribute('data-email', 'doc@theglitchdoctor.com'); // <<< THIS IS CRITICAL
-  script.setAttribute('data-theme', 'light');
-  script.setAttribute('data-lang', 'en-us');
-
-  document.body.appendChild(script);
-}
 </script>
 
 </body>
