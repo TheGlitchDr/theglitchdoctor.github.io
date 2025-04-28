@@ -270,7 +270,7 @@ body.dark-mode .launcher-menu a:hover {
   flex: 1 1 calc(50% - 1rem);
   background: var(--card-background-light);
   border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   padding: 1rem;
   transition: background 0.5s, box-shadow 0.3s;
 }
@@ -415,9 +415,9 @@ body.dark-mode .card:hover {
 }
 
 .certifications-card {
-  max-width: 700px; /* Make it narrower */
-  margin: 0 auto; /* Center it */
-  cursor: pointer; /* Show pointer on hover */
+  max-width: 700px;
+  margin: 0 auto 2rem auto; /* ADD 2rem bottom margin */
+  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
