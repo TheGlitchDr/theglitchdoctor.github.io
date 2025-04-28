@@ -66,7 +66,7 @@
 
     <div class="dropdown-menu" id="dropdownMenu">
       <a href="tel:9712606993" target="_blank">📞 Call - (971)260-6993</a>
-      <a href="https://yourchatlink.com" target="_blank">💬 Chat</a>
+      <a href="#" onclick="launchTeamsChat(); return false;">💬 Chat</a>
       <a href="mailto:doc@theglitchdoctor.com" target="_blank">✉️ Email</a>
       <a href="sms:9712606993" target="_blank">📱 Text/SMS - (971)260-6993</a>
       <a href="https://calendly.com/YOUR-CALENDLY-LINK" target="_blank">📅 Schedule Appointment</a>
@@ -222,5 +222,25 @@
     }
   });
 </script>
+
+<!-- Teams Chat Widget -->
+<script src="https://teams.microsoft.com/widget/ChatWidget.js"
+    data-name="John"
+    data-email="doc@theglitchdoctor.com"
+    data-theme="light"
+    data-lang="en-us"
+    id="teams-chat-widget"
+    style="display: none;"></script>
+
+  <script>
+function launchTeamsChat() {
+  const widget = document.getElementById('teams-chat-widget');
+  if (widget) {
+    widget.style.display = 'block'; // Make it visible
+  }
+}
+</script>
+
+
 </body>
 </html>
