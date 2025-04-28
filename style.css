@@ -193,7 +193,6 @@ body.dark-mode .launcher-menu a:hover {
   font-size: 1rem;
   font-weight: bold;
   color: #16325c;
-  animation: jitter 1s infinite;
 }
 
 /* General Page Styles */
