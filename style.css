@@ -558,3 +558,103 @@ body.dark-mode .card:hover {
   border-radius: 50%;
   object-fit: cover;
 }
+
+/* Admin-as-a-Service Section */
+.admin-service-section {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.admin-service-section h1 {
+  font-size: 2rem;
+  color: var(--highlight-color);
+  margin-bottom: 1rem;
+}
+
+.section-intro {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+}
+
+.two-column-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.pillar-card {
+  background: var(--card-background-light);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex: 1 1 300px;
+  max-width: 350px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0, 112, 210, 0.3);
+}
+
+.pillar-card h2 {
+  color: var(--highlight-color);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+/* Icon styling */
+.pillar-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Bounce effect for the icon */
+.pillar-card:hover .pillar-icon {
+  transform: translateY(-5px) rotate(-5deg);
+}
+
+.pillar-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.pillar-card ul li {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.cta-message {
+  margin-top: 3rem;
+  font-size: 1.1rem;
+}
+
+.cta-message a {
+  color: var(--highlight-color);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Responsive stacking */
+@media (max-width: 768px) {
+  .two-column-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pillar-card {
+    max-width: 90%;
+  }
+}
