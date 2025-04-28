@@ -115,7 +115,7 @@
   </div>
 
   <p class="cta-message">
-    Ready for expert remote administration? <a href="mailto:doc@theglitchdoctor.com">Contact The Glitch Doctor today!</a>
+    Ready for remote administration? <a href="mailto:doc@theglitchdoctor.com">Contact The Glitch Doctor today!</a>
   </p>
 </section>
 
@@ -219,57 +219,5 @@
     }
   });
 </script>
-
-  <script>
-function openModal() {
-  document.getElementById('contactModal').style.display = 'flex';
-}
-
-function closeModal() {
-  document.getElementById('contactModal').style.display = 'none';
-}
-
-function contactAction(method) {
-  closeModal(); // close popup first
-
-  switch (method) {
-    case 'chat':
-      window.open('https://yourchatlink.com', '_blank'); // Replace with your real chat link
-      break;
-    case 'email':
-      window.location.href = 'mailto:doc@theglitchdoctor.com';
-      break;
-    case 'call':
-      window.location.href = 'tel:9712606993';
-      break;
-    case 'sms':
-      window.location.href = 'sms:9712606993';
-      break;
-    case 'schedule':
-      window.open('https://calendly.com/your-schedule-link', '_blank'); // Replace with your real scheduling link
-      break;
-    default:
-      alert("Something went wrong. Please try again.");
-  }
-}
-</script>
-
-
-<div id="contactModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center;">
-  <div style="background: var(--card-background-light); padding: 2rem; border-radius: 12px; text-align: center; width: 320px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
-    <h3 style="margin-bottom: 1.5rem; color: var(--highlight-color);">How would you like to contact The Glitch Doctor? (note: This pop-up is still under construction)</h3>
-
-    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-      <button onclick="contactAction('chat')" class="modal-button">💬 Chat</button>
-      <button onclick="contactAction('email')" class="modal-button">✉️ Email</button>
-      <button onclick="contactAction('call')" class="modal-button">📞 Call</button>
-      <button onclick="contactAction('sms')" class="modal-button">📱 SMS</button>
-      <button onclick="contactAction('schedule')" class="modal-button">📅 Schedule</button>
-      <button onclick="closeModal()" class="modal-button cancel-button">❌ Cancel</button>
-    </div>
-  </div>
-</div>
-
-
 </body>
 </html>
