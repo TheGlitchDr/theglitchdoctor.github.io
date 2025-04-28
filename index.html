@@ -225,21 +225,32 @@
 
 <!-- Teams Chat Widget -->
 <script src="https://teams.microsoft.com/widget/ChatWidget.js"
-    data-name="John"
+    data-name="Doc"
     data-email="doc@theglitchdoctor.com"
     data-theme="light"
     data-lang="en-us"
     id="teams-chat-widget"
     style="display: none;"></script>
 
-  <script>
+<script>
 function launchTeamsChat() {
-  const widget = document.getElementById('teams-chat-widget');
-  if (widget) {
-    widget.style.display = 'block'; // Make it visible
+  if (document.getElementById('teams-chat-script')) {
+    // If already loaded, do nothing
+    return;
   }
+
+  const script = document.createElement('script');
+  script.id = 'teams-chat-script';
+  script.src = 'https://teams.microsoft.com/widget/ChatWidget.js';
+  script.setAttribute('data-name', 'Doc'); // your display name
+  script.setAttribute('data-email', 'doc@theglitchdoctor.com'); // your Microsoft 365 email
+  script.setAttribute('data-theme', 'light');
+  script.setAttribute('data-lang', 'en-us');
+
+  document.body.appendChild(script);
 }
 </script>
+
 
 
 </body>
