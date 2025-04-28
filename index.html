@@ -223,35 +223,26 @@
   });
 </script>
 
-<!-- Teams Chat Widget -->
-<script src="https://teams.microsoft.com/widget/ChatWidget.js"
-    data-name="Doc"
-    data-email="doc@theglitchdoctor.com"
-    data-theme="light"
-    data-lang="en-us"
-    id="teams-chat-widget"
-    style="display: none;"></script>
-
+<!-- ONLY THIS for Teams Chat -->
 <script>
 function launchTeamsChat() {
   if (document.getElementById('teams-chat-script')) {
-    // If already loaded, do nothing
+    console.log('Teams Chat already loaded.');
     return;
   }
 
+  console.log('Launching Teams Chat...');
   const script = document.createElement('script');
   script.id = 'teams-chat-script';
   script.src = 'https://teams.microsoft.com/widget/ChatWidget.js';
-  script.setAttribute('data-name', 'Doc'); // your display name
-  script.setAttribute('data-email', 'doc@theglitchdoctor.com'); // your Microsoft 365 email
+  script.setAttribute('data-name', 'Doc');
+  script.setAttribute('data-email', 'doc@theglitchdoctor.com');
   script.setAttribute('data-theme', 'light');
   script.setAttribute('data-lang', 'en-us');
 
   document.body.appendChild(script);
 }
 </script>
-
-
 
 </body>
 </html>
