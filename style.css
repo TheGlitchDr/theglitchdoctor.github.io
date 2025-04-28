@@ -32,7 +32,11 @@ body.dark-mode h1,
 body.dark-mode h2, 
 body.dark-mode h3, 
 body.dark-mode h4, 
-body.dark-mode .card p {
+body.dark-mode .card p, 
+body.dark-mode .pillar-card, 
+body.dark-mode .pillar-card ul li, 
+body.dark-mode .section-intro, 
+body.dark-mode .cta-message {
   color: var(--text-dark);
 }
 
