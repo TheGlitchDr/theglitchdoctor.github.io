@@ -57,6 +57,16 @@ body.dark-mode .launcher-menu a:hover {
   color: white;
 }
 
+body.dark-mode .pillar-card {
+  background-color: var(--card-background-dark);
+  color: var(--text-dark);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .pillar-card:hover {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
 /* Keyframes */
 @keyframes fadeIn {
   from { opacity: 0; }
