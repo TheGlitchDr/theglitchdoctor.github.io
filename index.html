@@ -69,10 +69,10 @@
         </div>
       </button>
 
-      <div class="launcher-menu" id="launcherMenu">
-        <div class="launcher-title">Glitch Console Tools</div>
-        <div class="tool-launcher-grid" id="toolGrid"></div>
-      </div>
+<div class="launcher-menu glitch-effect" id="launcherMenu">
+  <div class="glitch-header">⚡ Glitch Console Tools</div>
+  <div class="tool-grid" id="toolGrid"></div>
+</div>
 
     <div class="glitch-console">Glitch Console</div>
 
@@ -274,47 +274,33 @@ const tools = [
   {
     label: "Data Loader",
     url: "https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm",
-    icon: "🧲",
-    title: "Salesforce Data Loader"
+    icon: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 20h14v-2H5v2zM12 2L6.5 10h11L12 2z'/></svg>`
   },
   {
     label: "Email Deliverability",
     url: "https://redsift.com/tools/investigate",
-    icon: "📬",
-    title: "SPF, DKIM, DMARC checker"
+    icon: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/></svg>`
   },
   {
     label: "MX Toolbox",
     url: "https://mxtoolbox.com/SuperTool.aspx",
-    icon: "🛠️",
-    title: "DNS, MX, Blacklist checks"
+    icon: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M11 17h2v2h-2zm1-16C5.48 1 1 5.48 1 11s4.48 10 10 10 10-4.48 10-10S16.52 1 12 1zm0 18c-4.41 0-8-3.59-8-8 0-1.27.29-2.47.8-3.54L15.54 17.2C14.47 17.71 13.27 18 12 18zM4.46 7.8C5.53 6.73 6.73 6 8 6c1.27 0 2.47.29 3.54.8L4.46 7.8z'/></svg>`
   },
   {
     label: "Image Vectorizer",
     url: "https://vectorizer.com/",
-    icon: "🖼️",
-    title: "Convert PNG to SVG (BIMI)"
-  },
-  {
-    label: "More Coming Soon",
-    url: "#",
-    icon: "🚧",
-    title: "Placeholder"
+    icon: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4 6h16v2H4zm0 4h10v2H4zm0 4h6v2H4z'/></svg>`
   }
 ];
 
 const grid = document.getElementById("toolGrid");
 tools.forEach(tool => {
-  const tile = document.createElement("a");
-  tile.href = tool.url;
-  tile.className = "tool-tile";
-  tile.target = "_blank";
-  tile.title = tool.title;
-  tile.innerHTML = `
-    <span class="tool-icon">${tool.icon}</span>
-    <span class="tool-label">${tool.label}</span>
-  `;
-  grid.appendChild(tile);
+  const item = document.createElement("a");
+  item.className = "tool-item";
+  item.href = tool.url;
+  item.target = "_blank";
+  item.innerHTML = `${tool.icon}<span>${tool.label}</span>`;
+  grid.appendChild(item);
 });
 </script>
 
