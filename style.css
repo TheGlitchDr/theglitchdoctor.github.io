@@ -673,81 +673,71 @@ body.dark-mode .card:hover {
   }
 }
 
-:root {
-  --glitch-blue: #0f62fe;
-  --glitch-bg: #ffffff;
-  --glitch-dark-bg: #1f2a32;
-  --glitch-text: #1a1a1a;
-  --glitch-dark-text: #e4e4e4;
-  --tile-hover-glow: 0 0 0.8rem rgba(15, 98, 254, 0.6);
+/* ⚡ Minimal & Clean Glitch Console Styling */
+.launcher-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  width: 300px;
+  background: var(--card-background-light);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transform-origin: top center;
+  opacity: 0;
+  visibility: hidden;
+  transform: scaleY(0.95);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.launcher-menu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scaleY(1);
+  animation: glitchOpen 0.25s linear;
 }
 
-.tool-launcher-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 24px;
-  padding: 24px;
-  max-width: 1080px;
-  margin: auto;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.tool-tile {
-  background: var(--tile-bg, var(--glitch-bg));
-  border: none;
-  border-radius: 16px;
-  padding: 32px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.glitch-header {
+  font-weight: bold;
+  font-size: 1rem;
   text-align: center;
-  text-decoration: none;
-  color: var(--tile-text, var(--glitch-text));
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  background-image: linear-gradient(145deg, #ffffff, #f4f4f4);
+  color: var(--highlight-color);
+  margin-bottom: 0.75rem;
 }
 
-.tool-tile:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--tile-hover-glow);
-  background-image: linear-gradient(145deg, #f4faff, #ebf2ff);
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
 }
 
-.tool-icon {
-  font-size: 2.4rem;
-  margin-bottom: 18px;
+.tool-item {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 64px;
-  width: 64px;
-  border-radius: 50%;
-  background-color: #e8f0ff;
-  color: #0f62fe;
-  box-shadow: inset 0 0 0 4px #d4e5ff;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+  background: var(--background-light);
+  color: var(--text-light);
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.tool-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  color: inherit;
+.tool-item:hover {
+  background: var(--hover-light-blue);
+  transform: translateX(3px);
 }
 
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
+.tool-item svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--highlight-color);
 }
 
-body.dark-mode {
-  --tile-bg: var(--glitch-dark-bg);
-  --tile-text: var(--glitch-dark-text);
-  background-color: #121a21;
-}
-
-body.dark-mode .tool-tile {
-  background-image: linear-gradient(145deg, #1c2a36, #23333f);
+@keyframes glitchOpen {
+  0% { filter: brightness(1.5) contrast(1.5); transform: scale(1.1); }
+  50% { filter: hue-rotate(90deg); }
+  100% { filter: none; transform: scale(1); }
 }
