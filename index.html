@@ -302,12 +302,10 @@ tools.forEach(tool => {
   item.innerHTML = `${tool.icon}<span>${tool.label}</span>`;
   grid.appendChild(item);
 });
-  // Ensures no layout shifts happen if screen is wide enough
+// Optional: Ensure alignment on load
 window.addEventListener("load", () => {
   const nav = document.querySelector(".navbar");
-  if (window.innerWidth >= 768) {
-    nav.style.flexWrap = "nowrap";
-  }
+  nav.style.flexWrap = "nowrap";
 });
 </script>
 
