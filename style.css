@@ -91,24 +91,24 @@ body.dark-mode .pillar-card:hover {
 
 /* Navigation */
 .navbar {
-  background: linear-gradient(90deg, #f4f6f9 0%, #eef4ff 100%);
-  border-bottom: 1px solid #d8dde6;
   display: flex;
   align-items: center;
-  padding: 0.2rem 1rem;
-  position: relative;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(90deg, #f4f6f9 0%, #eef4ff 100%);
+  border-bottom: 1px solid #d8dde6;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
 .dropdown-wrapper {
   position: relative;
-  display: inline-block;
 }
 
 .launcher-button, .tab-button {
@@ -203,10 +203,11 @@ body.dark-mode .pillar-card:hover {
 
 /* Glitch Console */
 .glitch-console {
-  margin: 0 20px 0 12px;
   font-size: 1rem;
   font-weight: bold;
   color: #16325c;
+  margin-left: 0.5rem;
+  white-space: nowrap;
 }
 
 /* General Page Styles */
@@ -740,4 +741,9 @@ body.dark-mode .card:hover {
   0% { filter: brightness(1.5) contrast(1.5); transform: scale(1.1); }
   50% { filter: hue-rotate(90deg); }
   100% { filter: none; transform: scale(1); }
+}
+
+.tab-button {
+  margin-left: 1rem;
+  white-space: nowrap;
 }
