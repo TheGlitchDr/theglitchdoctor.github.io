@@ -91,23 +91,24 @@ body.dark-mode .pillar-card:hover {
 
 /* Navigation */
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
   background: linear-gradient(90deg, #f4f6f9 0%, #eef4ff 100%);
   border-bottom: 1px solid #d8dde6;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 1rem;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  flex: 1;
+  flex-wrap: wrap;
 }
 
 .dropdown-wrapper {
   position: relative;
+  display: inline-block;
 }
 
 .launcher-button, .tab-button {
@@ -202,11 +203,10 @@ body.dark-mode .pillar-card:hover {
 
 /* Glitch Console */
 .glitch-console {
+  margin: 0 20px 0 12px;
   font-size: 1rem;
   font-weight: bold;
   color: #16325c;
-  white-space: nowrap;
-  margin-left: 1rem;
 }
 
 /* General Page Styles */
@@ -671,101 +671,4 @@ body.dark-mode .card:hover {
   .pillar-card {
     max-width: 90%;
   }
-}
-
-/* ⚡ Minimal & Clean Glitch Console Styling */
-.launcher-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 999;
-  width: 300px;
-  background: var(--card-background-light);
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  transform-origin: top center;
-  opacity: 0;
-  visibility: hidden;
-  transform: scaleY(0.95);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-.launcher-menu.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: scaleY(1);
-  animation: glitchOpen 0.25s linear;
-}
-
-.glitch-header {
-  font-weight: bold;
-  font-size: 1rem;
-  text-align: center;
-  color: var(--highlight-color);
-  margin-bottom: 0.75rem;
-}
-
-.tool-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem;
-}
-
-.tool-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  text-decoration: none;
-  background: var(--background-light);
-  color: var(--text-light);
-  font-size: 0.9rem;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.tool-item:hover {
-  background: var(--hover-light-blue);
-  transform: translateX(3px);
-}
-
-.tool-item svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--highlight-color);
-}
-
-@keyframes glitchOpen {
-  0% { filter: brightness(1.5) contrast(1.5); transform: scale(1.1); }
-  50% { filter: hue-rotate(90deg); }
-  100% { filter: none; transform: scale(1); }
-}
-
-.tab-button {
-  margin-left: 1rem;
-  white-space: nowrap;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-  flex: 1;
-}
-
-/* Align "Glitch Console" center on wide view */
-.navbar {
-  position: relative;
-}
-
-.glitch-console {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.dropdown-wrapper:last-child {
-  margin-left: auto;
 }
