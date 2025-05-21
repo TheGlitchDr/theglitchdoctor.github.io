@@ -679,62 +679,75 @@ body.dark-mode .card:hover {
   --glitch-dark-bg: #1f2a32;
   --glitch-text: #1a1a1a;
   --glitch-dark-text: #e4e4e4;
+  --tile-hover-glow: 0 0 0.8rem rgba(15, 98, 254, 0.6);
 }
 
 .tool-launcher-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 24px;
   max-width: 1080px;
   margin: auto;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .tool-tile {
   background: var(--tile-bg, var(--glitch-bg));
-  border: 1px solid var(--tile-border, #e0e0e0);
-  border-radius: 14px;
-  padding: 24px 16px;
+  border: none;
+  border-radius: 16px;
+  padding: 32px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   text-decoration: none;
   color: var(--tile-text, var(--glitch-text));
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: transform 0.2s, box-shadow 0.2s, background 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   position: relative;
   overflow: hidden;
+  background-image: linear-gradient(145deg, #ffffff, #f4f4f4);
 }
 
 .tool-tile:hover {
-  transform: translateY(-5px) scale(1.02);
-  background: #f2f6ff;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: var(--tile-hover-glow);
+  background-image: linear-gradient(145deg, #f4faff, #ebf2ff);
 }
 
 .tool-icon {
-  font-size: 2.6rem;
-  margin-bottom: 14px;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
-  animation: glitch-pulse 1.6s infinite alternate;
+  font-size: 2.4rem;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  background-color: #e8f0ff;
+  color: #0f62fe;
+  box-shadow: inset 0 0 0 4px #d4e5ff;
 }
 
 .tool-label {
   font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: inherit;
 }
 
-/* Dark mode */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 body.dark-mode {
   --tile-bg: var(--glitch-dark-bg);
-  --tile-border: #3a4a55;
   --tile-text: var(--glitch-dark-text);
+  background-color: #121a21;
 }
 
-/* Glitchy icon effect */
-@keyframes glitch-pulse {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.05); opacity: 0.9; }
+body.dark-mode .tool-tile {
+  background-image: linear-gradient(145deg, #1c2a36, #23333f);
 }
