@@ -94,7 +94,6 @@ body.dark-mode .pillar-card:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: nowrap;
   padding: 0.5rem 1rem;
   background: linear-gradient(90deg, #f4f6f9 0%, #eef4ff 100%);
   border-bottom: 1px solid #d8dde6;
@@ -104,7 +103,7 @@ body.dark-mode .pillar-card:hover {
   display: flex;
   align-items: center;
   gap: 1rem;
-  flex-shrink: 0;
+  flex: 1;
 }
 
 .dropdown-wrapper {
@@ -206,8 +205,8 @@ body.dark-mode .pillar-card:hover {
   font-size: 1rem;
   font-weight: bold;
   color: #16325c;
-  margin-left: 0.5rem;
   white-space: nowrap;
+  margin-left: 1rem;
 }
 
 /* General Page Styles */
@@ -746,4 +745,27 @@ body.dark-mode .card:hover {
 .tab-button {
   margin-left: 1rem;
   white-space: nowrap;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex: 1;
+}
+
+/* Align "Glitch Console" center on wide view */
+.navbar {
+  position: relative;
+}
+
+.glitch-console {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdown-wrapper:last-child {
+  margin-left: auto;
 }
