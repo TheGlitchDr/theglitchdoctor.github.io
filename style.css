@@ -673,47 +673,72 @@ body.dark-mode .card:hover {
   }
 }
 
-.tool-grid {
+.tool-launcher-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  max-width: 720px;
 }
 
-.tool-grid a {
+.tool-tile {
+  background: var(--tile-bg, #ffffff);
+  border: 1px solid var(--tile-border, #e0e0e0);
+  border-radius: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: var(--tool-bg, #f4f6f9);
-  border-radius: 8px;
+  text-align: center;
   text-decoration: none;
-  color: var(--tool-color, #1a1a1a);
-  font-weight: 500;
-  padding: 12px 8px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  transition: background 0.2s, box-shadow 0.2s;
+  color: var(--tile-text, #1a1a1a);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
-.tool-grid a:hover {
-  background: var(--tool-hover, #e5f0ff);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.tool-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tool-tile:after {
+  content: "";
+  position: absolute;
+  background: rgba(0, 115, 230, 0.15);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s, opacity 0.6s;
+}
+
+.tool-tile:active:after {
+  transform: scale(4);
+  opacity: 1;
+  transition: 0s;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%) scale(0);
 }
 
 .tool-icon {
-  font-size: 1.5rem;
-  margin-bottom: 6px;
+  font-size: 2.2rem;
+  margin-bottom: 12px;
 }
 
 .tool-label {
-  font-size: 0.9rem;
-  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 /* Dark mode support */
 body.dark-mode {
-  --tool-bg: #1f2a32;
-  --tool-color: #e3e3e3;
-  --tool-hover: #2f3b44;
+  --tile-bg: #1f2a32;
+  --tile-border: #2d3e49;
+  --tile-text: #e4e4e4;
 }
 
