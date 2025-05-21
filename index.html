@@ -270,30 +270,30 @@
     }
   }
 
-   const tools = [
+const tools = [
     {
       label: "Data Loader",
       url: "https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm",
       icon: "🧲",
-      title: "Salesforce Data Loader for importing/exporting data"
+      title: "Salesforce Data Loader"
     },
     {
       label: "Deliverability",
       url: "https://redsift.com/tools/investigate",
       icon: "📬",
-      title: "Test SPF, DKIM, DMARC, and inbox placement"
+      title: "Test SPF, DKIM, DMARC, inbox placement"
     },
     {
       label: "MX Toolbox",
       url: "https://mxtoolbox.com/SuperTool.aspx",
       icon: "🛠️",
-      title: "DNS, MX, blacklist lookup"
+      title: "DNS and SMTP lookup tools"
     },
     {
       label: "Vectorizer",
       url: "https://vectorizer.com/",
       icon: "🖼️",
-      title: "Convert PNG/JPG to SVG — useful for BIMI"
+      title: "Convert images to SVG (great for BIMI)"
     },
     {
       label: "Under Construction",
@@ -303,20 +303,19 @@
     }
   ];
 
-  const toolGrid = document.getElementById("toolGrid");
+  const grid = document.getElementById("toolGrid");
 
   tools.forEach(tool => {
-    const link = document.createElement("a");
-    link.href = tool.url;
-    link.target = "_blank";
-    link.title = tool.title;
-
-    link.innerHTML = `
+    const tile = document.createElement("a");
+    tile.href = tool.url;
+    tile.className = "tool-tile";
+    tile.target = "_blank";
+    tile.title = tool.title;
+    tile.innerHTML = `
       <span class="tool-icon">${tool.icon}</span>
       <span class="tool-label">${tool.label}</span>
     `;
-
-    toolGrid.appendChild(link);
+    grid.appendChild(tile);
   });
 </script>
 
