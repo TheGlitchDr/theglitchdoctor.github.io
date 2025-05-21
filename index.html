@@ -69,23 +69,10 @@
         </div>
       </button>
 
- <div class="launcher-menu" id="launcherMenu">
-        <div class="launcher-title">Tools</div>
-        <a href="https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm" target="_blank">
-          Data Loader
-        </a>
-        <a href="https://redsift.com/tools/investigate" target="_blank">
-          Test Email Deliverability
-        </a>
-        <a href="https://mxtoolbox.com/SuperTool.aspx" target="_blank">
-          MX Toolbox - SuperTool
-        </a>
-        <a href="https://vectorizer.com/" target="_blank">
-          Image Vectorizor (BIMI)
-        </a>
-        <a href="#">Under Construction</a>
-      </div>
-    </div>
+<div class="launcher-menu" id="launcherMenu">
+  <div class="launcher-title">Tools</div>
+  <div class="tool-grid" id="toolGrid"></div>
+</div>
 
     <div class="glitch-console">Glitch Console</div>
 
@@ -282,6 +269,55 @@
         alert('Unknown contact method!');
     }
   }
+
+   const tools = [
+    {
+      label: "Data Loader",
+      url: "https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/loader_install_mac.htm",
+      icon: "🧲",
+      title: "Salesforce Data Loader for importing/exporting data"
+    },
+    {
+      label: "Deliverability",
+      url: "https://redsift.com/tools/investigate",
+      icon: "📬",
+      title: "Test SPF, DKIM, DMARC, and inbox placement"
+    },
+    {
+      label: "MX Toolbox",
+      url: "https://mxtoolbox.com/SuperTool.aspx",
+      icon: "🛠️",
+      title: "DNS, MX, blacklist lookup"
+    },
+    {
+      label: "Vectorizer",
+      url: "https://vectorizer.com/",
+      icon: "🖼️",
+      title: "Convert PNG/JPG to SVG — useful for BIMI"
+    },
+    {
+      label: "Under Construction",
+      url: "#",
+      icon: "🚧",
+      title: "Coming soon!"
+    }
+  ];
+
+  const toolGrid = document.getElementById("toolGrid");
+
+  tools.forEach(tool => {
+    const link = document.createElement("a");
+    link.href = tool.url;
+    link.target = "_blank";
+    link.title = tool.title;
+
+    link.innerHTML = `
+      <span class="tool-icon">${tool.icon}</span>
+      <span class="tool-label">${tool.label}</span>
+    `;
+
+    toolGrid.appendChild(link);
+  });
 </script>
 
 </body>
