@@ -1,167 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Remote Salesforce & IT Administration | The Glitch Doctor | Vancouver, WA</title>
-  <meta name="description" content="Remote Salesforce and IT systems administration for Portland–Vancouver and remote clients. CRM, automation, server support, and secure email deliverability." />
-  <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#0b5cab" />
-  <link rel="canonical" href="https://theglitchdoctor.com/" />
+  <meta name="description" content="Remote Salesforce and IT Systems Administration for businesses in the Portland Metro area. CRM Setup, Server Support, Email Deliverability. Contact The Glitch Doctor today.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Remote Salesforce & IT Administration | The Glitch Doctor">
+  <meta property="og:description" content="Salesforce and IT services for businesses. Based in Vancouver, WA.">
+  <meta property="og:image" content="https://theglitchdoctor.com/logo1024.png">
+  <meta property="og:url" content="https://theglitchdoctor.com/">
+  <meta property="og:type" content="website">
 
-  <!-- Social -->
-  <meta property="og:title" content="Remote Salesforce & IT Administration | The Glitch Doctor" />
-  <meta property="og:description" content="Salesforce and IT services for businesses. Based in Vancouver, WA." />
-  <meta property="og:image" content="/logo1024.png" />
-  <meta property="og:url" content="https://theglitchdoctor.com/" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
 
-  <!-- Icons & PWA -->
-  <link rel="icon" href="/favicon.png" type="image/png" />
-  <link rel="apple-touch-icon" href="/logo1024.png" />
-  <link rel="manifest" href="/manifest.webmanifest" />
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="/style.css" />
-
-  <!-- Structured data -->
+  <!-- Local Business Schema -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"LocalBusiness","name":"The Glitch Doctor","image":"https://theglitchdoctor.com/logo1024.png","url":"https://theglitchdoctor.com","logo":"https://theglitchdoctor.com/logo1024.png","email":"doc@theglitchdoctor.com","telephone":"+1-971-260-6993","address":{"@type":"PostalAddress","addressLocality":"Vancouver","addressRegion":"WA","postalCode":"98684","addressCountry":"US"},"areaServed":["Portland Metro","Vancouver WA","Remote"],"sameAs":["https://www.linkedin.com/company/the-glitch-doctor/"]}
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "The Glitch Doctor",
+  "image": "https://theglitchdoctor.com/logo1024.png",
+  "telephone": "+1-971-260-6993",
+  "email": "doc@theglitchdoctor.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Vancouver",
+    "addressRegion": "WA",
+    "postalCode": "98684",
+    "addressCountry": "US"
+  },
+  "url": "https://theglitchdoctor.com",
+  "description": "Remote Salesforce and IT Systems Administration support for businesses in Vancouver, WA and the Portland Metro area."
+}
+</script>
 </head>
 
 <body>
-  <header class="site-top">
-    <div class="brand">
-      <img src="/logo1024.png" width="36" height="36" alt="The Glitch Doctor" class="brand-mark" />
-      <span class="brand-name">The Glitch Doctor</span>
-    </div>
-    <nav class="top-actions" aria-label="Top actions">
-      <button class="ghost" id="darkModeToggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
-      <a class="pill primary" href="https://outlook.office.com/bookwithme/user/6f88f6bea72140189a04a0bf24233a22@theglitchdoctor.com?anonymous&ep=plink" target="_blank" rel="noopener noreferrer">Book a call</a>
-      <a class="pill" href="mailto:doc@theglitchdoctor.com">Email</a>
-      <a class="pill" href="tel:+19712606993">Call</a>
-    </nav>
-  </header>
+<div id="loader" style="display: none;"></div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <h1>Admin-as-a-Service (<abbr title="Administration as a Service">AaaS</abbr>) for Salesforce & IT</h1>
-      <p class="lead">Senior admin horsepower on demand. I tune orgs, automate work, harden email, and keep systems healthy.
-      <span class="u-muted">Local to Vancouver–Portland, available remotely.</span></p>
-      <div class="cta-row">
-        <a class="cta primary" href="https://outlook.office.com/bookwithme/user/6f88f6bea72140189a04a0bf24233a22@theglitchdoctor.com?anonymous&ep=plink" target="_blank" rel="noopener noreferrer">Schedule</a>
-        <a class="cta" href="mailto:doc@theglitchdoctor.com">Send email</a>
+<!-- Top Navbar -->
+<div class="top-navbar">
+  <div class="top-navbar-left"></div>
+  <div class="top-navbar-center">
+    <form action="https://www.google.com/search" method="GET" target="_blank" style="width: 100%; max-width: 400px;">
+      <input type="text" name="q" placeholder="Search..." class="top-search-bar" />
+    </form>
+  </div>
+  <div class="top-navbar-right">
+    <div class="dark-mode-toggle">
+      <label for="darkModeToggle" style="margin-right: 0.2rem;">🌙</label>
+      <input type="checkbox" id="darkModeToggle">
+    </div>
+    <img src="GlitchDoctor_NoBackground.png" alt="Logo" class="logo">
+  </div>
+</div>
+
+<header class="navbar" style="display: none;">
+  <div class="nav-left">
+    <div class="dropdown-wrapper">
+      <button id="launcherButton" class="launcher-button">
+        <div class="launcher-icon">
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+        </div>
+      </button>
+
+ <div class="launcher-menu" id="launcherMenu">
+        <div class="launcher-title">Tools</div>
+        <a href="https://developer.salesforce.com/tools/data-loader" target="_blank">
+          Data Loader
+        </a>
+        <a href="https://redsift.com/tools/investigate" target="_blank">
+          Test Email Deliverability
+        </a>
+        <a href="https://mxtoolbox.com/SuperTool.aspx" target="_blank">
+          MX Toolbox - SuperTool
+        </a>
+        <a href="https://vectorizer.com/" target="_blank">
+          Image Vectorizor (BIMI)
+        </a>
+        <a href="#">Under Construction</a>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="grid3d"></div>
+
+    <div class="glitch-console">Glitch Console</div>
+
+    <div class="dropdown-wrapper">
+      <button id="tabButton" class="tab-button active">CONTACT</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="tel:9712606993" target="_blank">📞 Call - (971)260-6993</a>
+        <a href="mailto:doc@theglitchdoctor.com" target="_blank">✉️ Email</a>
+        <a href="https://outlook.office.com/bookwithme/user/6f88f6bea72140189a04a0bf24233a22@theglitchdoctor.com?anonymous&ep=plink" target="_blank">📅 Schedule Appointment</a>
+      </div>
     </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="page-header">
+    <img src="logo1024.png" alt="Glitch Doctor Logo">
+  </div>
+
+  <section class="admin-service-section">
+    <h1>Admin-as-a-Service (AaaS)</h1>
+    <p class="section-intro">
+      Flexible, remote administration — without the full-time costs. The Glitch Doctor provides Salesforce Administration Services and IT Systems Support on-demand for individuals or growing businesses. On-site services available in the Portland Metro region.
+    </p>
+
+    <div class="two-column-cards">
+      <div class="pillar-card">
+        <h2><span class="pillar-icon">☁️</span> Salesforce Administration Services</h2>
+        <ul>
+          <li>CRM Setup, Workflow Automation, Flows, and Custom Objects</li>
+          <li>Data Management, Reporting, and Dashboard Creation</li>
+          <li>User Setup, Permissions Management, and Health Checks</li>
+          <li>Experience with Sales Cloud, Service Cloud, Milestones PM+, and Pardot/Account Engagement</li>
+        </ul>
+      </div>
+         
+      <div class="pillar-card">
+        <h2><span class="pillar-icon">🖥️</span> IT Systems Management</h2>
+        <ul>
+          <li>Windows Server Management & Workstation Setup</li>
+          <li>Hypervisor Configuration and Administration</li>
+          <li>Citrix and RDS Environment Support</li>
+          <li>Remote Monitoring, Security, and Troubleshooting</li>
+          <li>Microsoft 365 Administration and Optimization</li>
+          <li>Email Deliverability: SPF, DKIM, DMARC, MTA-STS, TLS-RPT, and BIMI</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <h2><span class="pillar-icon">🛠️</span> Flexible Support Solutions</h2>
+        <ul>
+          <li>On-Demand Remote Salesforce Administration</li>
+          <li>Scheduled IT System Health Reviews</li>
+          <li>Rapid-Response Technical Services</li>
+        </ul>
+      </div>
     </div>
+
+    <p class="cta-message">
+      Ready for remote administration? <a href="#" onclick="openModal(); return false;">Contact The Glitch Doctor today!</a>
+    </p>
   </section>
 
-  <main id="main" class="container">
-    <section class="cards3">
-      <article class="card fx">
-        <h2>Salesforce Administration</h2>
-        <ul>
-          <li><abbr title="Customer Relationship Management">CRM</abbr> setup, flows, custom objects</li>
-          <li>Data quality, reports, dashboards</li>
-          <li>Users, permissions, org health checks</li>
-          <li>Sales Cloud, Service Cloud, Milestones PM+, Account Engagement (<abbr title="formerly Pardot">Pardot</abbr>)</li>
-        </ul>
-      </article>
-      <article class="card fx">
-        <h2>IT Systems Management</h2>
-        <ul>
-          <li>Windows Server and workstation provisioning</li>
-          <li>Hypervisors, Citrix, <abbr title="Remote Desktop Services">RDS</abbr></li>
-          <li>Remote monitoring, security, troubleshooting</li>
-          <li>Microsoft 365 administration and optimization</li>
-        </ul>
-      </article>
-      <article class="card fx">
-        <h2>Email Deliverability</h2>
-        <ul>
-          <li><abbr title="Sender Policy Framework">SPF</abbr>, <abbr title="DomainKeys Identified Mail">DKIM</abbr>, <abbr title="Domain-based Message Authentication, Reporting, and Conformance">DMARC</abbr></li>
-          <li><abbr title="Mail Transfer Agent Strict Transport Security">MTA-STS</abbr>, <abbr title="Transport Layer Security Reporting">TLS-RPT</abbr>, <abbr title="Brand Indicators for Message Identification">BIMI</abbr></li>
-          <li>DNS, <abbr title="Domain Name System">DNS</abbr> records, monitoring, and audits</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="about card fx">
-      <h2>About</h2>
-      <p>16+ years across tech support, TechOps, and Salesforce administration. I specialize in automation and reliability.
-      </p>
-      <ul class="list-plain">
-        <li>🛠️ Technical Support I→III</li>
-        <li>🔧 TechOps Engineer I→II</li>
-        <li>☁️ Salesforce Administrator</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-left">
-        <img src="/favicon.png" width="28" height="28" alt="Logo" />
-        <span>&copy; 2025 The Glitch Doctor</span>
+  <div class="card certifications-card">
+    <a href="https://www.salesforce.com/trailblazer/jlytle" target="_blank" style="text-decoration:none; color: inherit;">
+      <h2>Current Salesforce Certifications</h2>
+      <div class="certifications-images">
+        <img src="2022-08_Badge_SF-Certified_Administrator_500x490px.png" alt="2022 Certified Administrator" width="75" height="73">
+        <img src="2021-03_Badge_SF-Certified_Administrator_500x490px.png" alt="2021 Certified Administrator" width="75" height="73">
+        <img src="2023-07_Badge_SF-Certified_AI-Associate_500x490px.png" alt="2023 Certified AI Associate" width="75" height="73">
       </div>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="mailto:doc@theglitchdoctor.com">Contact</a>
-        <a href="#">Privacy</a>
-        <a href="https://www.linkedin.com/company/the-glitch-doctor/?viewAsMember=true" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </nav>
+    </a>
+  </div>
+
+  <div class="card certifications-card">
+    <h2>About The Glitch Doctor</h2>
+    <p>Over 16 years of experience supporting and delivering cloud-based solutions for businesses.</p>
+
+    <ul style="list-style: none; padding: 0; text-align: left; margin-top: 1rem;">
+      <li>🛠️ 5 years of progressive growth through Technical Support Levels I, II, and III</li>
+      <li>🔧 11 years as a TechOps Engineer, advancing from Level I to II</li>
+      <li>☁️ 5 years concurrently serving as a Salesforce Administrator while leading TechOps initiatives</li>
+    </ul>
+
+    <p style="margin-top: 1.5rem;">
+      Specializing in Salesforce Administration, IT Infrastructure, and cloud system optimization.  
+      Passionate about innovation, efficiency, and elevating user experiences.
+    </p>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center;">
+    <div id="contactModalContent" style="background: white; padding: 2rem; border-radius: 12px; text-align: center; width: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); animation: slideDown 0.3s ease-out;">
+      <h3 style="margin-bottom: 1.5rem;">How would you like to contact The Glitch Doctor?</h3>
+      <button class="modal-button" onclick="contactAction('email')">✉️ Email</button>
+      <button class="modal-button" onclick="contactAction('call')">📞 Call</button>
+      <button class="modal-button" onclick="contactAction('schedule')">📅 Schedule</button>
+      <br><br>
+      <button class="modal-button cancel-button" onclick="closeModal()">Cancel</button>
     </div>
-  </footer>
+  </div>
+</main>
 
-  <script>
-  (function(){
-    const root = document.documentElement;
-    const btn = document.getElementById('darkModeToggle');
-    const saved = localStorage.getItem('darkMode');
-    const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    function setDark(on){
-      root.classList.toggle('dark', on);
-      if(btn) btn.setAttribute('aria-pressed', String(on));
-      localStorage.setItem('darkMode', on ? 'enabled' : 'disabled');
-    }
-    setDark(saved ? saved==='enabled' : prefers);
-    btn && btn.addEventListener('click', () => setDark(!root.classList.contains('dark')));
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-top">
+      <img src="favicon.png" alt="The Glitch Doctor Logo" class="footer-logo">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="mailto:doc@theglitchdoctor.com">Contact</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/company/the-glitch-doctor/?viewAsMember=true" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Icon" class="social-icon">
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 The Glitch Doctor - Custom built to feel like Salesforce 💙
+    </div>
+  </div>
+</footer>
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+<script>
+  window.addEventListener("load", function() {
+    document.getElementById("loader").style.display = "none";
+    document.querySelector("header").style.display = "flex";
+    document.querySelector("main").style.display = "block";
+  });
+
+  const tabButton = document.getElementById('tabButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  const launcherButton = document.getElementById('launcherButton');
+  const launcherMenu = document.getElementById('launcherMenu');
+
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    darkModeToggle.checked = true;
+  }
+
+  darkModeToggle.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
     }
-  })();
-      if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const root = document.documentElement;
-      const grid = document.querySelector('.grid3d');
-      if (grid) {
-        let t = 0, mx = 0, my = 0, tx = 0, ty = 0;
-        const setVar = (n,v)=> root.style.setProperty(n, v);
-        function onMove(e){
-          const x = e.clientX !== undefined ? e.clientX : (innerWidth/2);
-          const y = e.clientY !== undefined ? e.clientY : (innerHeight/2);
-          tx = (x / innerWidth) * 2 - 1;   // -1..1
-          ty = (y / innerHeight) * 2 - 1;  // -1..1
-        }
-        window.addEventListener('pointermove', onMove, {passive:true});
-        function loop(){
-          t += 0.6;                   // speed
-          mx += (tx - mx) * 0.06;     // easing
-          my += (ty - my) * 0.06;
-          setVar('--mx', mx.toFixed(4));
-          setVar('--my', my.toFixed(4));
-          setVar('--gridY', t.toFixed(2));
-          requestAnimationFrame(loop);
-        }
-        loop();
-      }
+  });
+
+  tabButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('visible');
+    launcherMenu.classList.remove('visible');
+  });
+
+  launcherButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    launcherMenu.classList.toggle('visible');
+    dropdownMenu.classList.remove('visible');
+  });
+
+  window.addEventListener('click', function(e) {
+    if (!tabButton.contains(e.target) && !dropdownMenu.contains(e.target) &&
+        !launcherButton.contains(e.target) && !launcherMenu.contains(e.target)) {
+      dropdownMenu.classList.remove('visible');
+      launcherMenu.classList.remove('visible');
     }
-  })();
-  </script>
+  });
+
+  function openModal() {
+    document.getElementById('contactModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('contactModal').style.display = 'none';
+  }
+
+  function contactAction(method) {
+    closeModal();
+    switch (method) {
+      case 'email':
+        window.location.href = 'mailto:doc@theglitchdoctor.com';
+        break;
+      case 'call':
+        window.location.href = 'tel:9712606993';
+        break;
+      case 'schedule':
+        window.open('https://outlook.office.com/bookwithme/user/6f88f6bea72140189a04a0bf24233a22@theglitchdoctor.com?anonymous&ep=plink', '_blank');
+        break;
+      default:
+        alert('Unknown contact method!');
+    }
+  }
+</script>
+
 </body>
 </html>
