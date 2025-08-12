@@ -59,6 +59,7 @@
     <div class="hero-art" aria-hidden="true">
       <div class="grid3d"></div>
     </div>
+    </div>
   </section>
 
   <main id="main" class="container">
@@ -133,6 +134,32 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+    }
+  })();
+      if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const root = document.documentElement;
+      const grid = document.querySelector('.grid3d');
+      if (grid) {
+        let t = 0, mx = 0, my = 0, tx = 0, ty = 0;
+        const setVar = (n,v)=> root.style.setProperty(n, v);
+        function onMove(e){
+          const x = e.clientX !== undefined ? e.clientX : (innerWidth/2);
+          const y = e.clientY !== undefined ? e.clientY : (innerHeight/2);
+          tx = (x / innerWidth) * 2 - 1;   // -1..1
+          ty = (y / innerHeight) * 2 - 1;  // -1..1
+        }
+        window.addEventListener('pointermove', onMove, {passive:true});
+        function loop(){
+          t += 0.6;                   // speed
+          mx += (tx - mx) * 0.06;     // easing
+          my += (ty - my) * 0.06;
+          setVar('--mx', mx.toFixed(4));
+          setVar('--my', my.toFixed(4));
+          setVar('--gridY', t.toFixed(2));
+          requestAnimationFrame(loop);
+        }
+        loop();
+      }
     }
   })();
   </script>
