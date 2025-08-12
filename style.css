@@ -52,10 +52,10 @@ img { max-width: 100%; height: auto; }
 .dropdown-menu a, .launcher-menu a { padding: .5rem .6rem; border-radius: .5rem; text-decoration: none; color: var(--text); }
 .dropdown-menu a:hover, .launcher-menu a:hover { background: var(--card); }
 
-.container { width: min(100%, 1000px); margin: 0 auto; padding: 1rem; }
+.container { width: min(100%, 1200px); margin: 0 auto; padding: 1rem; }
 .page-header { display: grid; place-items: center; padding: 1.25rem 0 0; }
 
-.admin-service-section h1 { font-size: clamp(1.6rem, 1.2rem + 2vw, 2.2rem); margin: .25rem 0 .75rem; }
+.admin-service-section h1 { font-size: clamp(1.8rem, 1rem + 2.8vw, 2.6rem); margin: .25rem 0 .75rem; }
 .section-intro { color: var(--muted); max-width: 70ch; }
 
 .two-column-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1rem 0; }
@@ -85,3 +85,6 @@ img { max-width: 100%; height: auto; }
 
 /* Small helpers */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* Acronym styling */
+abbr[title] { text-decoration: underline dotted; text-underline-offset: 2px; }
