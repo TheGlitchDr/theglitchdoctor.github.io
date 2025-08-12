@@ -34,7 +34,29 @@ body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,rgba(120,179,2
 .cta.primary{border-color:transparent;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#081122;box-shadow:var(--shadow)}
 
 /* 3D grid accent */
-.hero-art{pointer-events:none;position:absolute;inset:auto 0 0 0;height:220px;}
+.hero-art{pointer-events:none;position:absolute;inset:auto 0 0 0;height:260px;}
+.grid3d{
+  --mx: 0;           /* normalized cursor X, -1..1 */
+  --my: 0;           /* normalized cursor Y, -1..1 (kept for future) */
+  --gridY: 0;        /* animated scroll pixels */
+  position:absolute;inset:auto 0 0 0;height:260px;will-change:transform,background-position,filter;
+  background:
+    linear-gradient(rgba(120,179,255,.12),transparent 70%),
+    repeating-linear-gradient(0deg,rgba(120,179,255,.22),rgba(120,179,255,.22) 1px,transparent 1px,transparent 24px),
+    repeating-linear-gradient(90deg,rgba(120,179,255,.22),rgba(120,179,255,.22) 1px,transparent 1px,transparent 24px);
+  background-position:
+    0 calc(var(--gridY)*1px),
+    0 calc(var(--gridY)*1.25px),
+    0 calc(var(--gridY)*1.25px);
+  transform:
+    perspective(700px)
+    rotateX(60deg)
+    rotateY(calc(var(--mx) * 10deg))
+    translateX(calc(var(--mx) * 14px));
+  transform-origin:bottom;filter:drop-shadow(0 20px 40px rgba(0,0,0,.35));
+}
+@media (max-width: 640px){ .hero-art,.grid3d{height:200px} }
+@media (prefers-reduced-motion: reduce){ .grid3d{background-position:0 0,0 0,0 0} }
 .grid3d{position:absolute;inset:auto 0 0 0;height:220px;background:linear-gradient(rgba(120,179,255,.15),transparent 70%),
   repeating-linear-gradient(0deg,rgba(120,179,255,.2),rgba(120,179,255,.2) 1px,transparent 1px,transparent 20px),
   repeating-linear-gradient(90deg,rgba(120,179,255,.2),rgba(120,179,255,.2) 1px,transparent 1px,transparent 20px);
