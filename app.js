@@ -33,8 +33,7 @@
     dialog.querySelectorAll('a').forEach(link => link.addEventListener('click', () => dialog.close()));
   });
   const directory = [
-    { title: 'Automation playground', description: 'Run a sample workflow and explore alternate paths.', href: 'index.html#playground', keywords: 'interactive simulation demo flow' },
-    { title: 'Build a project brief', description: 'Choose your challenges and prepare a conversation starter.', href: 'index.html#solution-builder', keywords: 'consulting plan project quote help' },
+    { title: 'Start a service request', description: 'Describe your issue and prepare a development brief for John.', href: 'index.html#ticket-intake', keywords: 'ticket intake support project issue help request' },
     { title: 'Salesforce administration', description: 'Users, permissions, data cleanup, and Financial Services Cloud.', href: 'index.html#services', keywords: 'admin support security configuration' },
     { title: 'Automation & custom development', description: 'Flow, Apex, and Lightning Web Components.', href: 'index.html#services', keywords: 'automate code process repetitive workflow' },
     { title: 'Infrastructure & email', description: 'Microsoft 365, Windows Server, and email delivery.', href: 'index.html#services', keywords: 'technical systems infrastructure troubleshooting' },
@@ -90,115 +89,8 @@
 
 (() => {
   'use strict';
-  const model = globalThis.GlitchLabModel;
-  if (!model) return;
   const byId = id => document.getElementById(id);
-  document.querySelectorAll('[data-scroll]').forEach(button => button.addEventListener('click', () => {
-    byId(button.dataset.scroll)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  }));
-  if (byId('run-flow')) {
-    let scenario = 'onboarding';
-    let current = -1;
-    let timer = null;
-    const nodes = [...document.querySelectorAll('[data-step]')];
-    const run = byId('run-flow');
-    const condition = byId('scenario-condition');
-    function stop() { clearInterval(timer); timer = null; }
-    function render() {
-      const steps = model.workflow(scenario, condition.checked);
-      const running = timer !== null;
-      nodes.forEach((node, i) => {
-        node.classList.toggle('complete', i < current || current === 3);
-        node.classList.toggle('active', i === current);
-        node.setAttribute('aria-pressed', String(i === current));
-        node.setAttribute('aria-label', `Step ${i + 1}: ${steps[i][0]}`);
-      });
-      document.querySelectorAll('.flow-connector').forEach((line, i) => line.classList.toggle('complete', i < current));
-      byId('branch-title').textContent = current >= 2 ? steps[2][0] : 'Choose a path';
-      byId('branch-description').textContent = current >= 2 ? (condition.checked ? 'Condition met' : 'Alternate path') : 'The right next step';
-      byId('flow-counter').textContent = `${current + 1} / 4 steps`;
-      byId('inspector-label').textContent = current < 0 ? 'READY WHEN YOU ARE' : `STEP ${current + 1} / ${current === 3 ? 'OUTCOME' : 'INSPECT THE FLOW'}`;
-      byId('inspector-title').textContent = current < 0 ? 'One event. A useful chain reaction.' : steps[current][0];
-      byId('inspector-description').textContent = current < 0 ? 'Run the workflow, or select a step to inspect it.' : steps[current][1];
-      byId('sample-record-status').textContent = current < 0 ? 'Ready to evaluate' : (current === 3 ? (condition.checked ? 'Processed · sample only' : 'Alternate path · sample only') : 'Evaluating sample');
-      byId('flow-status').textContent = running ? 'Running sample…' : current === 3 ? 'Sample complete' : current >= 0 ? 'Paused / inspect any step' : 'Ready';
-      run.textContent = running ? 'Pause workflow Ⅱ' : current === 3 ? 'Run again ↻' : current < 0 ? 'Run workflow ▶' : 'Continue workflow ▶';
-    }
-    function reset() { stop(); current = -1; render(); }
-    function selectScenario(key) {
-      reset(); scenario = key;
-      const s = model.scenarios[key];
-      byId('scenario-title').textContent = s.title;
-      byId('scenario-description').textContent = s.description;
-      byId('condition-label').textContent = s.condition;
-      byId('sample-record-name').textContent = s.record;
-      byId('flow-takeaway').textContent = s.takeaway;
-      document.querySelectorAll('[data-scenario]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.scenario === key)));
-      render();
-    }
-    document.querySelectorAll('[data-scenario]').forEach(button => button.addEventListener('click', () => selectScenario(button.dataset.scenario)));
-    nodes.forEach(node => node.addEventListener('click', () => { stop(); current = Number(node.dataset.step); render(); }));
-    condition.addEventListener('change', reset);
-    byId('reset-flow').addEventListener('click', reset);
-    run.addEventListener('click', () => {
-      if (timer !== null) { stop(); render(); return; }
-      if (current === 3) current = -1;
-      current += 1;
-      if (current < 3) timer = setInterval(() => {
-        current += 1;
-        if (current >= 3) stop();
-        render();
-      }, 1450);
-      render();
-    });
-    document.addEventListener('visibilitychange', () => { if (document.hidden && timer !== null) { stop(); render(); } });
-    render();
-  }
-  if (byId('project-brief')) {
-    const selected = new Set(['automation']);
-    let timing = 'ready';
-    const email = byId('email-brief');
-    function renderBrief() {
-      const list = byId('brief-recommendations');
-      list.replaceChildren();
-      [...selected].forEach(key => {
-        const item = document.createElement('div');
-        item.className = 'brief-recommendation';
-        const title = document.createElement('strong'); title.textContent = model.challenges[key].title;
-        const detail = document.createElement('p'); detail.textContent = model.challenges[key].detail;
-        item.append(title, detail); list.append(item);
-      });
-      if (!selected.size) {
-        const message = document.createElement('p'); message.textContent = 'Pick at least one challenge to build your brief.'; list.append(message);
-      }
-      const text = model.brief([...selected], timing);
-      byId('project-brief').value = text;
-      byId('download-brief').disabled = !selected.size;
-      email.setAttribute('aria-disabled', String(!selected.size));
-      if (selected.size) email.href = 'mailto:doc@theglitchdoctor.com?subject=' + encodeURIComponent('Let’s improve our Salesforce and systems') + '&body=' + encodeURIComponent(text);
-      else email.removeAttribute('href');
-      document.querySelectorAll('[data-challenge]').forEach(button => {
-        const on = selected.has(button.dataset.challenge);
-        button.setAttribute('aria-pressed', String(on));
-        button.querySelector('.choice-check').textContent = on ? '✓' : '+';
-      });
-      document.querySelectorAll('[data-timing]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.timing === timing)));
-    }
-    document.querySelectorAll('[data-challenge]').forEach(button => button.addEventListener('click', () => {
-      const key = button.dataset.challenge;
-      selected.has(key) ? selected.delete(key) : selected.add(key);
-      renderBrief();
-    }));
-    document.querySelectorAll('[data-timing]').forEach(button => button.addEventListener('click', () => { timing = button.dataset.timing; renderBrief(); }));
-    byId('download-brief').addEventListener('click', () => {
-      const url = URL.createObjectURL(new Blob([byId('project-brief').value], { type: 'text/plain;charset=utf-8' }));
-      const anchor = document.createElement('a');
-      anchor.href = url; anchor.download = 'My_Glitch_Doctor_Project_Brief.txt';
-      document.body.append(anchor); anchor.click(); anchor.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    });
-    renderBrief();
-  }
+  document.querySelectorAll('[data-scroll]').forEach(button => button.addEventListener('click', () => byId(button.dataset.scroll)?.scrollIntoView({ behavior: 'smooth' })));
   if (byId('studio-brand')) {
     const paper = document.querySelector('.paper');
     const brand = byId('studio-brand');
@@ -261,4 +153,119 @@
       byId('document-status').textContent = 'Sample reset';
     });
   }
+})();
+
+(() => {
+  'use strict';
+  const form = document.getElementById('intake-form');
+  if (!form || !globalThis.GlitchIntake) return;
+  const panels = [...form.querySelectorAll('[data-intake-panel]')];
+  const buttons = [...document.querySelectorAll('[data-intake-step]')];
+  const next = document.getElementById('intake-next');
+  const back = document.getElementById('intake-back');
+  const review = document.getElementById('request-preview');
+  const email = document.getElementById('email-request');
+  const status = document.getElementById('request-action-status');
+  const date = new Date();
+  const stamp = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
+  const bytes = new Uint8Array(4);
+  if (globalThis.crypto?.getRandomValues) crypto.getRandomValues(bytes);
+  else for (let i=0;i<bytes.length;i++) bytes[i]=Math.floor(Math.random()*256);
+  const reference = `GD-${stamp}-${Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('').toUpperCase()}`;
+  let current = 0, furthest = 0;
+  const tips = [
+    ['You explain the problem. I’ll help work out the solution.', 'Focus on what you need to accomplish. You don’t need to know whether it takes a setting, an automation, or custom development.'],
+    ['“It should do this, but it does that.”', 'That comparison is useful. An exact error message or a short sequence of steps can also save a lot of back-and-forth.'],
+    ['Impact helps define priority.', 'Tell me who is affected and whether work can continue. A small issue for a whole team can be worth solving before a bigger-looking one.'],
+    ['A useful brief. A better first conversation.', 'Your answers are organized into a development intake, including proposed success criteria and questions to resolve before the work starts.']
+  ];
+  function data() { return Object.fromEntries(new FormData(form).entries()); }
+  function updateReview() {
+    const values = data();
+    review.value = globalThis.GlitchIntake.format(values, reference);
+    document.getElementById('request-reference').textContent = reference;
+    email.href = 'mailto:doc@theglitchdoctor.com?subject=' + encodeURIComponent(`[${reference}] ${values.title || 'New service request'}`) + '&body=' + encodeURIComponent(review.value);
+  }
+  function show(index, focus = true) {
+    current = index; furthest = Math.max(furthest,index);
+    panels.forEach((panel,i) => { panel.hidden = i !== index; });
+    buttons.forEach((button,i) => {
+      button.disabled = i > furthest;
+      if (i === index) button.setAttribute('aria-current','step'); else button.removeAttribute('aria-current');
+      button.classList.toggle('visited',i < index);
+    });
+    back.hidden = index === 0;
+    next.hidden = index === 3;
+    next.textContent = index === 2 ? 'Review my request →' : 'Continue →';
+    document.getElementById('intake-progress').textContent = `Step ${index+1} of 4`;
+    document.getElementById('intake-tip-title').textContent = tips[index][0];
+    document.getElementById('intake-tip').textContent = tips[index][1];
+    if (index === 3) updateReview();
+    if (focus) {
+      const legend = panels[index].querySelector('legend');
+      legend.tabIndex = -1; legend.focus({preventScroll:true});
+      document.querySelector('.intake-console').scrollIntoView({behavior:'auto',block:'start'});
+    }
+  }
+  function validateThrough(last) {
+    for (let i=0;i<=last && i<3;i++) {
+      for (const control of panels[i].querySelectorAll('input,select,textarea')) {
+        if (control.required && !control.value.trim()) control.setCustomValidity('Please fill in this field.');
+        else control.setCustomValidity('');
+        if (!control.checkValidity()) { show(i); control.reportValidity(); return false; }
+      }
+    }
+    return true;
+  }
+  form.addEventListener('input',event => {
+    if (event.target.setCustomValidity) event.target.setCustomValidity('');
+  });
+  form.elements.timing.addEventListener('change',() => {
+    const required = form.elements.timing.value === 'There is a specific deadline';
+    document.getElementById('deadline-field').hidden = !required;
+    form.elements.deadline.required = required;
+    form.elements.deadline.disabled = !required;
+    if (!required) form.elements.deadline.setCustomValidity('');
+  });
+  form.elements.deadline.disabled = true;
+  form.elements.kind.addEventListener('change',() => {
+    document.getElementById('details-guidance').textContent = form.elements.kind.value === 'Build something new' ? 'Describe how the work is handled today and the new experience you want to create. If there is no current process, say so.' : 'Describe what happens now and what you need instead. “I’m not sure” is a useful answer, too.';
+  });
+  form.elements.area.addEventListener('change',() => {
+    const labels = { Salesforce:'Salesforce context: screen, object, automation, error, or recent change', 'Documents & templates':'Document context: template, source data, output format, or error', 'Microsoft 365 & email':'Email or service context: affected app, exact error, and when it started' };
+    document.getElementById('context-label').textContent = labels[form.elements.area.value] || 'Helpful context';
+  });
+  form.addEventListener('submit',event => {
+    event.preventDefault();
+    if (current < 3 && validateThrough(current)) show(current+1);
+  });
+  back.addEventListener('click',() => show(Math.max(0,current-1)));
+  buttons.forEach(button => button.addEventListener('click',() => {
+    const target = Number(button.dataset.intakeStep);
+    if (target <= current || validateThrough(target-1)) show(target);
+  }));
+  email.addEventListener('click',event => {
+    if (!validateThrough(2)) { event.preventDefault(); return; }
+    updateReview();
+    status.textContent = 'Opening your email app. The request is not sent until you send the email there.';
+  });
+  document.getElementById('copy-request').addEventListener('click',async () => {
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(review.value);
+      status.textContent = 'Brief copied. Paste it into your email to John.';
+    } catch (_) {
+      review.focus(); review.select();
+      status.textContent = 'Brief selected. Use your device’s Copy command, then paste it into your email.';
+    }
+  });
+  document.getElementById('download-request').addEventListener('click',() => {
+    const url = URL.createObjectURL(new Blob([review.value],{type:'text/plain;charset=utf-8'}));
+    const anchor = document.createElement('a');
+    anchor.href = url; anchor.download = `${reference}_Development_Brief.txt`;
+    document.body.append(anchor); anchor.click(); anchor.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    status.textContent = 'Brief download requested. You can attach it to an email to John.';
+  });
+  show(0,false);
 })();
