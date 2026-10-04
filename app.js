@@ -37,7 +37,7 @@
     { title: 'Automation & custom development', description: 'Flow, Apex, and Lightning Web Components.', href: 'index.html#services', keywords: 'automate code process repetitive workflow' },
     { title: 'Infrastructure & email', description: 'Microsoft 365, Windows Server, and email delivery.', href: 'index.html#services', keywords: 'technical systems infrastructure troubleshooting' },
     { title: 'Solutions from real-world work', description: 'Campaign views, beneficiary summaries, and action plans.', href: 'index.html#work', keywords: 'reporting household marketing dashboards' },
-    { title: 'MergeMedic', description: 'A Salesforce document product in development.', href: 'mergemedic.html', keywords: 'documents templates experlogix designer print product' },
+    { title: 'Top Secret Project', description: 'A Salesforce document project. Name under wraps.', href: 'top-secret.html', keywords: 'documents templates designer print product secret merge' },
     { title: 'About John', description: 'The person behind The Glitch Doctor.', href: 'index.html#about', keywords: 'experience background contact' }
   ];
   const search = document.getElementById('site-search');
